@@ -3,51 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class AgentManager : MonoBehaviour
+namespace HERATouch
 {
-    #region Singleton
-    public static AgentManager instance;
-    private void Awake()
+    public class AgentManager : MonoBehaviour
     {
-        if (instance != this)
+        #region Singleton
+        public static AgentManager instance;
+        private void Awake()
         {
-            instance = this;
-        }
-    }
-    #endregion
-
-    // For Test use: To add the robots to the manager
-    public List<RobotAgent> robotAgents;
-    public int currentAgent = 0;
-
-    public GameObject idLabel;
-
-    private List<RobotAgent> _robotAgents;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        if (robotAgents.Count == 0)
-        {
-            Debug.LogError("No Robot agent detected!");
-        }
-        else
-        {
-            _robotAgents = new List<RobotAgent>();
-            foreach (var agent in robotAgents)
+            if (instance != this)
             {
-                AddAgent(agent);
+                instance = this;
             }
         }
+        #endregion
 
-        idLabel.GetComponentInChildren<TextMeshProUGUI>().text = "ID: " + currentAgent.ToString();
-    }
+        [SerializeField]
+        private RobotAgent _robotAgent;
 
+        public List<Item> itemsPool;
 
-    public void AddAgent(RobotAgent agent)
-    {
-        agent.id = _robotAgents.Count;
-        _robotAgents.Add(agent);
+        //public GameObject idLabel;
+
+        // Start is called before the first frame update
+        void Start()
+        {
+            if (!_robotAgent) Debug.Log("No robot agent initialized!");
+
+            //idLabel.GetComponentInChildren<TextMeshProUGUI>().text = "ID: " + currentAgent.ToString();
+        }
+
+        public RobotAgent GetRobotAgent()
+        {
+            return _robotAgent;
+        }
+
     }
 
 }

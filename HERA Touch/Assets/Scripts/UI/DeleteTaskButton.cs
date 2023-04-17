@@ -2,13 +2,17 @@ using System;
 using UnityEngine.EventSystems;
 using UnityEngine;
 
-public class DeleteTaskButton : MonoBehaviour
+namespace HERATouch
 {
-    public void OnClicked()
+    public class DeleteTaskButton : MonoBehaviour
     {
-        AgentManager.instance.robotAgents[AgentManager.instance.currentAgent].DeleteTask(GetComponentInParent<TaskBubble>().index);
-        EventManager.instance.taskBubbleEvents.Selected(false);
-        Debug.Log("Task Deleted!");
-    }
+        public void OnClicked()
+        {
+            AgentManager.instance.GetRobotAgent().DeleteTask(GetComponentInParent<TaskBubble>().taskIndex);
+            EventManager.instance.taskBubbleEvents.Selected(false);
+            // Debug.Log("Task Deleted!");
+        }
 
+    }
 }
+

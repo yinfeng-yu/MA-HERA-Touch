@@ -24,7 +24,7 @@ public class MyScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandle
     private RectTransform _scrollRectRect;
     private RectTransform _container;
 
-    private bool _horizontal;
+    // private bool _horizontal;
     
     // number of pages in container
     protected int _pageCount;
@@ -59,14 +59,14 @@ public class MyScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandle
         _containerSpacing = (int)_container.GetComponent<HorizontalLayoutGroup>().spacing;
 
         // is it horizontal or vertical scrollrect
-        if (_scrollRectComponent.horizontal && !_scrollRectComponent.vertical) {
-            _horizontal = true;
-        } else if (!_scrollRectComponent.horizontal && _scrollRectComponent.vertical) {
-            _horizontal = false;
-        } else {
-            Debug.LogWarning("Confusing setting of horizontal/vertical direction. Default set to horizontal.");
-            _horizontal = true;
-        }
+        // if (_scrollRectComponent.horizontal && !_scrollRectComponent.vertical) {
+        //     _horizontal = true;
+        // } else if (!_scrollRectComponent.horizontal && _scrollRectComponent.vertical) {
+        //     _horizontal = false;
+        // } else {
+        //     Debug.LogWarning("Confusing setting of horizontal/vertical direction. Default set to horizontal.");
+        //     _horizontal = true;
+        // }
 
         // init
         if (_pageCount > 0)
@@ -82,34 +82,28 @@ public class MyScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandle
     {
         SetContentWidth();
 
-        // if (!_lerp)
-        // {
-        //     if (ChildSelected() != _container.childCount)
-        //     {
-        //         // A child is selected
-        // 
-        //         LerpToPosition(new Vector2(_offsetsX[ChildSelected()], 0), ChildSelected());
-        // 
-        //     }
-        //     else
-        //     {
-        //         LerpToPosition(new Vector2(_offsetsX[_currentPage], 0), _currentPage);
-        //     }
-        // }
+        int selectedChild = ChildSelected();
 
-        if (ChildSelected() != _container.childCount && !_lerp)
+        if (selectedChild != _container.childCount)
         {
             // A child is selected
-
-            LerpToPosition(new Vector2(_offsetsX[ChildSelected()], 0), ChildSelected());
-
+            _lerpTo = new Vector2(_offsetsX[selectedChild], 0);
+            _lerp = true;
+        }
+        else
+        {
+            _lerpTo = new Vector2(0, 0);
+            _lerp = true;
         }
 
+        
 
         // if moving to target position
         if (_lerp) 
         {
-            Debug.Log("lerping");
+            // Debug.Log(ChildSelected());
+            // Debug.Log(_lerpTo);
+            // Debug.Log(_offsetsX[selectedChild]);
             //_container.anchoredPosition = _lerpTo;
             //_lerp = false;
             //_scrollRectComponent.velocity = Vector2.zero;
@@ -191,6 +185,15 @@ public class MyScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandle
 
     }
 
+    protected virtual void LerpToPosition(Vector2 offset, int pageIndex)
+    {
+        _lerpTo = offset;
+        // Debug.Log(_lerpTo);
+        _lerp = true;
+        _currentPage = pageIndex;
+
+    }
+
 
     //------------------------------------------------------------------------
     // private void SetPagePositions() {
@@ -266,14 +269,8 @@ public class MyScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandle
     //     _currentPage = pageIndex;
     // 
     // }
-    
-    protected virtual void LerpToPosition(Vector2 offset, int pageIndex) {
-        _lerpTo = offset;
-        // Debug.Log(_lerpTo);
-        _lerp = true;
-        _currentPage = pageIndex;
 
-    }
+
 
 
 

@@ -2,12 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "TouchMate/Task")]
-public class TaskData : ScriptableObject
+namespace HERATouch
 {
-    public new string name;
-    public string description;
+    [CreateAssetMenu(menuName = "HERA Touch/Task Data")]
+    public class TaskData : ScriptableObject
+    {
+        public new string name;
+        public string description;
 
-    public string localReferenceKey;
+        public string buttonLocalRefKey;
+        public string bubbleLocalRefKey;
 
+        public List<Subtask> subtasks;
+
+
+        public Item requiredItem; // A Glass of water for giving water to patient
+    }
+
+    
 }

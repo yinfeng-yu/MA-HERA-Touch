@@ -29,6 +29,9 @@ public class SwipeMenuScrollSnapRect : ScrollSnapRect
         // We are at the last page (settings).
         EventManager.instance.SettingsEntered(pageIndex == _pageCount - 1);
 
+        // We are at the second last page (notification).
+        EventManager.instance.NotificationEntered(pageIndex == _pageCount - 2, pageIndex == _pageCount - 1);
+
     }
     
 }

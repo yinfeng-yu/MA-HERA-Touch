@@ -18,7 +18,7 @@ MonoBehaviour:
   m_GUID: f444fb3496d6dce4695fc10b7cffafec
   m_SerializeEntries:
   - m_GUID: 564bae0ab35617f4094878fb16be4073
-    m_Address: TouchMate Table_en
+    m_Address: HERA Touch Table_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en

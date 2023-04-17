@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: TouchMate Table_de
+  m_Name: HERA Touch Table_de
   m_EditorClassIdentifier: 
   m_LocaleId:
     m_Code: de
@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 361086574592
-    m_Localized: Kontrolle
+    m_Localized: Benachr.
     m_Metadata:
       m_Items: []
   - m_Id: 738938839040
@@ -80,6 +80,22 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 788238124965888
     m_Localized: Vorne Verschieben
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5126772445143040
+    m_Localized: Erteilen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5127929221603328
+    m_Localized: "Einen Patienten ausw\xE4hlen"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6236261453914112
+    m_Localized: "Wasser f\xFCr <> nehmen"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6476788556357632
+    m_Localized: "Die K\xF6rpertemperatur von <> messen"
     m_Metadata:
       m_Items: []
   references:

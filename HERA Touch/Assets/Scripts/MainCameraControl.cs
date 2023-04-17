@@ -11,6 +11,7 @@ public class MainCameraControl : MonoBehaviour
 
 
     public Vector3 cameraSettingsOffset = new Vector3(8, 0, 0);
+    public Vector3 cameraNotificationOffset = new Vector3(8, 0, 0);
     public Vector3 cameraTaskSelectedOffset = new Vector3(0, 0, -2);
     public Vector3 cameraTaskBubbleSelectedOffset = new Vector3(0, 24, -7f);
 
@@ -19,6 +20,7 @@ public class MainCameraControl : MonoBehaviour
 
     private Vector3 _cameraOriginPos;
     private Vector3 _cameraSettingsPos;
+    private Vector3 _cameraNotificationPos;
     private Vector3 _cameraTaskSelectedPos;
     private Vector3 _cameraTaskBubbleSelectedPos;
 
@@ -28,11 +30,13 @@ public class MainCameraControl : MonoBehaviour
         EventManager.instance.taskButtonEvents.selected += OnTaskButtonSelected;
         EventManager.instance.taskBubbleEvents.selected += OnTaskBubbleSelected;
         EventManager.instance.settingsEntered += OnSettingsEntered;
+        EventManager.instance.notificationEntered += OnNotificationEntered;
 
         _cameraOriginPos = Camera.main.transform.position;
         _cameraTaskSelectedPos = _cameraOriginPos + cameraTaskSelectedOffset;
         _cameraTaskBubbleSelectedPos = _cameraOriginPos + cameraTaskBubbleSelectedOffset;
         _cameraSettingsPos = _cameraOriginPos + cameraSettingsOffset;
+        _cameraNotificationPos = _cameraOriginPos + cameraNotificationOffset;
     }
 
     private void Update()
@@ -66,7 +70,13 @@ public class MainCameraControl : MonoBehaviour
 
     void OnSettingsEntered(bool enter)
     {
-        _cameraLerpTo = enter ? _cameraSettingsPos : _cameraOriginPos;
+        _cameraLerpTo = enter ? _cameraSettingsPos : _cameraNotificationPos;
+        _cameraLerp = true;
+    }
+
+    void OnNotificationEntered(bool enter, bool enter_settings)
+    {
+        _cameraLerpTo = enter ? _cameraNotificationPos : (enter_settings ? _cameraSettingsPos : _cameraOriginPos);
         _cameraLerp = true;
     }
 }

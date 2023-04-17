@@ -1,35 +1,39 @@
 using System;
 using UnityEngine;
 
-public class TasksPageManager : MonoBehaviour
+namespace HERATouch
 {
-    #region Singleton
-    public static TasksPageManager instance;
-    private void Awake()
+    public class TasksPageManager : MonoBehaviour
     {
-        if (instance != this)
+        #region Singleton
+        public static TasksPageManager instance;
+        private void Awake()
         {
-            instance = this;
+            if (instance != this)
+            {
+                instance = this;
+            }
         }
+        #endregion
+
+        public TasksListDisplay taskDisplay;
+
+
+
+        // Start is called before the first frame update
+        void Start()
+        {
+            taskDisplay = GetComponentInChildren<TasksListDisplay>();
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+
+
     }
-    #endregion
-
-    public TasksListDisplay taskDisplay;
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        taskDisplay = GetComponentInChildren<TasksListDisplay>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
-
 }
+

@@ -14,4 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Temperature
   description: Measure the temperature of patient
-  localReferenceKey: '[Task Description] Temperature'
+  buttonLocalRefKey: '[Task Button] Temperature'
+  bubbleLocalRefKey: '[Task Bubble] Temperature'
+  subtasks:
+  - name: Collecting thermometer
+    type: 1
+    location: {x: -0.2, y: 0, z: 1.5}
+    requiredTime: 2
+    usedTime: 0
+    progress: 0
+  - name: Measuring temperature
+    type: 2
+    location: {x: 0.5, y: 0, z: -3}
+    requiredTime: 3
+    usedTime: 0
+    progress: 0
+  - name: Returning thermometer
+    type: 1
+    location: {x: -0.2, y: 0, z: 1.15}
+    requiredTime: 3
+    usedTime: 0
+    progress: 0
+  requiredItem: 2
