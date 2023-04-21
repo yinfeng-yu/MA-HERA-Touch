@@ -95,6 +95,18 @@ MonoBehaviour:
     m_Key: '[Task Bubble] Temperature'
     m_Metadata:
       m_Items: []
+  - m_Id: 7531761218084864
+    m_Key: '[Swipe Toggle] Task Assignment'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7531926414942208
+    m_Key: '[Swipe Toggle] Task List'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7978642180136960
+    m_Key: '[Task Description] Move'
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

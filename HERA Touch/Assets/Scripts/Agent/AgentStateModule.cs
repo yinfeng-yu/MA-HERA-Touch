@@ -9,11 +9,15 @@ namespace HERATouch
     {
         public AgentBaseState currentState;
 
-        public AgentCollectingState collectingState = new AgentCollectingState();
+        // public AgentCollectingState collectingState = new AgentCollectingState();
         public AgentDisplacingState displacingState = new AgentDisplacingState();
         public AgentInteractingState interactingState = new AgentInteractingState();
         public AgentIdleState idleState = new AgentIdleState();
-        public AgentReturnState returnState = new AgentReturnState();
+        // public AgentReturnState returnState = new AgentReturnState();
+        // public AgentMoveToCollectLocState moveToCollectLocState = new AgentMoveToCollectLocState();
+        // public AgentMoveToPatientState moveToPatientState = new AgentMoveToPatientState();
+
+        
 
         private void Start()
         {
@@ -25,7 +29,7 @@ namespace HERATouch
         {
             currentState.UpdateState(this);
 
-            // Update the state UI.
+            // Update the agent state UI.
             UIManager.instance.stateLabel.GetComponentInChildren<LocalizeStringEvent>().StringReference.SetReference("HERA Touch Table", currentState.locRefKey);
         }
 

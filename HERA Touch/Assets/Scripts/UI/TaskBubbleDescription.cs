@@ -12,7 +12,7 @@ namespace HERATouch
         {
             string tagFront = "<color=orange>";
             string tagBack = "</color>";
-            string patientName = PatientsManager.instance.GetPatientNames()[GetComponentInParent<TaskBubble>().patientId];
+            string patientName = PatientsManager.instance.GetPatientNames()[GetComponentInParent<TasksListEntry>().patientId];
             string updatedText;
 
             for (int i = 0; i < text.Length; i++)

@@ -8,9 +8,7 @@ namespace HERATouch
     {
         public void OnClicked()
         {
-            AgentManager.instance.GetRobotAgent().DeleteTask(GetComponentInParent<TaskBubble>().taskIndex);
-            EventManager.instance.taskBubbleEvents.Selected(false);
-            // Debug.Log("Task Deleted!");
+            AgentManager.instance.GetRobotAgent().DeleteTask(GetComponentInParent<TasksListEntry>().taskIndex);
         }
 
     }

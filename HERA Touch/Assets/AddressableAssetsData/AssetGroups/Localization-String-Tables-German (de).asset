@@ -22,6 +22,12 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-de
+  - m_GUID: aeba9f8abe56c8c4f906bd9297dd7f6d
+    m_Address: HERA Touch Notification_de
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-de
+    - Preload
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 8ec81c151ac4c024b979cbc86ef65492, type: 2}
   m_SchemaSet:

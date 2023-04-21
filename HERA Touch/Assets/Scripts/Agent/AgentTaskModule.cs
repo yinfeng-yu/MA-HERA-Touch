@@ -17,100 +17,83 @@ namespace HERATouch
 
         public List<Task> tasks;
 
-        public Item itemOnHand;
+        public Item emptyItem;
+        [SerializeField] private Item _itemOnHand;
+        // public ItemLocations itemLocations;
+
+        private Vector3 _curDest;
+
+        public bool subtaskCompleted = true;
+
+        [SerializeField] private float _requiredTime = 2f;
+        [SerializeField] private float _usedTime = 0f;
 
         // Start is called before the first frame update
         void Start()
         {
             _robotAgent = GetComponent<RobotAgent>();
-            itemOnHand = Item.None;
+            _itemOnHand = emptyItem;
+
+            _curDest = transform.position;
         }
 
         // Update is called once per frame
         void Update()
         {
-            // if (tasks.Count > 0) // We have some tasks in the queue.
-            // {
-            //     Task curTask = tasks[0];
-            // 
-            //     if (curTask.taskStatus != TaskStatus.OnGoing) return;
-            // 
-            //     if (GetComponent<RobotAgent>().itemOnHand.type == curTask.requiredItem.type) // The item matches.
-            //     {
-            //         // Is the task done?
-            //         if (curTask.taskStatus != TaskStatus.Completed) // Not done. Go to the patient.
-            //         {
-            //             if (Vector3.Distance(transform.position, curTask.subtasks[0].location) <= 0.1f) // Arrived.
-            //             {
-            //                 // Interact with patient.
-            //                 
-            //                 curTask.subtasks[0].usedTime += Time.deltaTime;
-            //                 curTask.subtasks[0].progress = curTask.subtasks[0].usedTime / curTask.subtasks[0].requiredTime;
-            //                 if (curTask.subtasks[0].usedTime >= curTask.subtasks[0].requiredTime)
-            //                 {
-            //                     // The current subtask is done;
-            //                     curTask.subtasks.RemoveAt(0);
-            //                 }
-            //             }
-            //             else // Not yet arrived.
-            //             {
-            // 
-            //             }
-            //         }
-            // 
-            // 
-            // 
-            //     }
-            // 
-            // 
-            // 
-            // }
+            
+        }
 
-
-
-
-            if (tasks.Count > 0)
+        public void AddTask(Task task)
+        {
+            if (tasks.Count == 0)
             {
-                Task curTask = tasks[0];
-
-                if (curTask.taskStatus != TaskStatus.OnGoing)
-                {
-                    return;
-                }
-
-                if (curTask.subtasks.Count == 0)
-                {
-                    // The task is completed.
-
-                    _robotAgent.DeleteTask(0);
-                    
-                    // Debug.Log("Task Finished!");
-                    if (tasks.Count > 0 && _taskExeMode == TaskExeMode.ExeNextWhenComplete)
-                    {
-                        _robotAgent.StartTask(0);
-                    }
-                }
-                else
-                {
-                    if (Vector3.Distance(transform.position, curTask.subtasks[0].location) <= 0.1f)
-                    {
-                        curTask.subtasks[0].usedTime += Time.deltaTime;
-                        curTask.subtasks[0].progress = curTask.subtasks[0].usedTime / curTask.subtasks[0].requiredTime;
-                        if (curTask.subtasks[0].usedTime >= curTask.subtasks[0].requiredTime)
-                        {
-                            // The current subtask is done;
-                            curTask.subtasks.RemoveAt(0);
-                        }
-                    }
-                    
-                }
-                
+                task.taskStatus = TaskStatus.OnGoing;
             }
+            tasks.Add(task);
+            TasksPageManager.instance.UpdateTasksList(tasks);
+        }
+
+        public void DeleteTask(int taskIndex)
+        {
+            tasks.RemoveAt(taskIndex);
+            TasksPageManager.instance.UpdateTasksList(tasks);
+        }
+
+        public void PriotizeTask(int taskIndex)
+        {
+            if (taskIndex == 0) return;
+            Task task = tasks[taskIndex];
+
+            for (int i = taskIndex; i > 0; i--)
+            {
+                tasks[i] = tasks[i - 1];
+            }
+            tasks[0] = task;
+        }
+
+        public void StartTask(int taskIndex)
+        {
+            tasks[0].taskStatus = TaskStatus.Paused;
+            tasks[taskIndex].taskStatus = TaskStatus.OnGoing;
+
+            PriotizeTask(taskIndex);
+        }
+
+        public TaskStatus GetTaskStatus(int index)
+        {
+            if (index < tasks.Count) return tasks[index].taskStatus;
+            return TaskStatus.Paused;
         }
 
         public bool HasTask()
         {
             return tasks.Count != 0;
+        }
+
+        public bool HasTaskInProgress()
+        {
+            if (!HasTask()) return false;
+            return tasks[0].taskStatus == TaskStatus.OnGoing;
         }
 
         public Task GetCurrentTask()
@@ -120,36 +103,48 @@ namespace HERATouch
 
         public bool HasItem()
         {
-            return itemOnHand != Item.None;
+            return _itemOnHand.type != ItemType.None;
         }
 
         public bool HasCorrectItem()
         {
-            return itemOnHand == tasks[0].taskData.requiredItem;
+            return _itemOnHand == tasks[0].taskData.requiredItem;
         }
 
-        public Vector3 GetCurrentDest()
+        public void CollectItem(Item item)
         {
-            if (tasks.Count > 0)
-            {
-                if (tasks[0].subtasks.Count > 0)
-                {
-                    return tasks[0].subtasks[0].location;
-                }
-            }
-            return new Vector3(0, 100, 0); // 100 is detected as an invalid digit.
+            _itemOnHand = item;
         }
 
-        public float GetCurrentSubtaskProgress()
+        public void DropItem()
         {
-            if (tasks.Count > 0)
-            {
-                if (tasks[0].subtasks.Count > 0)
-                {
-                    return tasks[0].subtasks[0].progress;
-                }
-            }
-            return 0;
+            _itemOnHand.type = ItemType.None;
+        }
+
+        public Item GetCurrentItem()
+        {
+            return _itemOnHand;
+        }
+
+        public void SetCurrentItem(Item item)
+        {
+            _itemOnHand = item;
+        }
+
+        public void CompleteCurrentTask()
+        {
+            NotificationManager.instance.Notify(GetCurrentTask().GetTaskType(), PatientsManager.instance.GetPatientNames()[GetCurrentTask().patientId], "36.5");
+            GetComponent<RobotAgent>().CompleteTask(0);
+        }
+
+        public void StartSubtask(float requiredTime = 2f)
+
+        {
+            Debug.Log("start subtask");
+            subtaskCompleted = false;
+            _usedTime = 0f;
+            _requiredTime = requiredTime;
+
         }
 
     }

@@ -11,7 +11,7 @@ namespace HERATouch
         // Update is called once per frame
         void Update()
         {
-            GetComponent<Slider>().value = AgentManager.instance.GetRobotAgent().gameObject.GetComponent<AgentTaskModule>().GetCurrentSubtaskProgress();
+            // GetComponent<Slider>().value = AgentManager.instance.GetRobotAgent().gameObject.GetComponent<AgentTaskModule>().GetCurrentSubtaskProgress();
         }
     }
 

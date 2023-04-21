@@ -4,11 +4,26 @@ using UnityEngine;
 
 namespace HERATouch
 {
-    public enum Item
+    public enum ItemType
     {
         None,
         Water,
         Thermo,
+    }
+
+    [CreateAssetMenu(menuName = "HERA Touch/Item")]
+    public class Item : ScriptableObject
+    {
+        public ItemType type;
+
+        [MyBox.ConditionalField(nameof(type), true, ItemType.None)]
+        public Site collectSite;
+
+        [MyBox.ConditionalField(nameof(type), true, ItemType.None)]
+        public Site returnSite;
+
+        [MyBox.ConditionalField(nameof(type), true, ItemType.None)]
+        public bool shouldBeReturned;
     }
 
     // public class Item

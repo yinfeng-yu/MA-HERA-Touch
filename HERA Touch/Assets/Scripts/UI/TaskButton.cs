@@ -10,10 +10,11 @@ namespace HERATouch
     public class TaskButton : Expandable
     {
         public TaskData taskData;
-        // public TaskAssignData taskAssignData;
 
         public TMP_Dropdown patientSelectDropdown;
         public Button assignButton;
+
+        public TasksButtonsControl tasksButtonsControl;
 
         private int _selectedPatientId;
 
@@ -22,7 +23,6 @@ namespace HERATouch
             base.Start();
 
             EventManager.instance.taskBubbleEvents.clicked += ResetExpandable;
-            SwipeManager.instance.swipeUp += OnSwipeUp;
 
             assignButton.onClick.AddListener(() => { AssignTask(); });
 
@@ -39,21 +39,13 @@ namespace HERATouch
             EventManager.instance.taskButtonEvents.Clicked();
             EventManager.instance.taskButtonEvents.Selected(_selected);
 
-            if (GetComponent<Animator>().GetBool("inspected")) GetComponent<Animator>().SetBool("inspected", false);
+            if (_selected) tasksButtonsControl.LerpTo(-GetComponent<RectTransform>().anchoredPosition.y);
+            // if (GetComponent<Animator>().GetBool("inspected")) GetComponent<Animator>().SetBool("inspected", false);
         }
 
-        void OnSwipeUp()
+        private void Update()
         {
-            if (_selected)
-            {
-
-                // Debug.Log("Task Inspected");
-
-                _selectedPatientId = patientSelectDropdown.value;
-
-                GetComponent<Animator>().SetBool("inspected", true);
-
-            }
+            
         }
 
         public void SetPatientId(int patientId)
@@ -63,25 +55,11 @@ namespace HERATouch
 
         void AssignTask()
         {
-            // Debug.Log("Task Added!");
+            Debug.Log("Task Added!");
 
-            List<Subtask> subtasks = new List<Subtask>();
-            for (int i = 0; i < taskData.subtasks.Count; i ++)
-            {
-                if (taskData.subtasks[i].type == SubtaskType.InteractingWithPatient)
-                {
-                    Subtask subtask = new Subtask(taskData.subtasks[i].name, PatientsManager.instance.patientList.patients[_selectedPatientId].location, taskData.subtasks[i].requiredTime);
-                    subtasks.Add(subtask);
-                }
-                else 
-                {
-                    Subtask subtask = new Subtask(taskData.subtasks[i].name, taskData.subtasks[i].location, taskData.subtasks[i].requiredTime);
-                    subtasks.Add(subtask);
-                }
-            }
-            AgentManager.instance.GetRobotAgent().AddTask(new Task(taskData, _selectedPatientId, subtasks));
+            AgentManager.instance.GetRobotAgent().AddTask(new Task(taskData, _selectedPatientId));
 
-            GetComponent<Animator>().SetBool("inspected", false);
+            // GetComponent<Animator>().SetBool("inspected", false);
             GetComponent<Animator>().SetBool("selected", false);
             EventManager.instance.taskButtonEvents.Selected(false);
         }

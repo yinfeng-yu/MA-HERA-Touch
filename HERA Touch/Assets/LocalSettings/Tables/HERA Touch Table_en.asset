@@ -47,7 +47,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 601665680957440
-    m_Localized: Grab a glass of water to patient.
+    m_Localized: Bring a glass of water to patient.
     m_Metadata:
       m_Items: []
   - m_Id: 620182962692096
@@ -91,11 +91,23 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 6236261453914112
-    m_Localized: Grabbing water to <>
+    m_Localized: Bringing water to <>
     m_Metadata:
       m_Items: []
   - m_Id: 6476788556357632
     m_Localized: Measuring temperature of <>
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7531761218084864
+    m_Localized: Task Assignment
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7531926414942208
+    m_Localized: Tasks List
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7978642180136960
+    m_Localized: Move to a location
     m_Metadata:
       m_Items: []
   references:

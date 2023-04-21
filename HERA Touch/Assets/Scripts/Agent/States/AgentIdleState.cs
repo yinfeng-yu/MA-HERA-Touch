@@ -21,12 +21,15 @@ namespace HERATouch
         public override void UpdateState(AgentStateModule agentStateModule)
         {
             AgentTaskModule agentTaskModule = agentStateModule.gameObject.GetComponent<AgentTaskModule>();
+            AgentNavModule agentNavModule = agentStateModule.gameObject.GetComponent<AgentNavModule>();
+
             if (agentTaskModule.HasTask())
             {
                 
                 if (agentTaskModule.HasCorrectItem())
                 {
                     // Skip collecting, head to patient.
+                    agentNavModule.SetDestination(agentTaskModule.GetCurrentTask().patientSite);
                     agentStateModule.SwitchState(agentStateModule.displacingState);
 
                 }
@@ -34,13 +37,15 @@ namespace HERATouch
                 else if (agentTaskModule.HasItem())
                 {
                     // Have the wrong item. Need to return first.
-                    agentStateModule.SwitchState(agentStateModule.returnState);
+                    agentNavModule.SetDestination(agentTaskModule.GetCurrentItem().returnSite);
+                    agentStateModule.SwitchState(agentStateModule.displacingState);
                 }
 
                 else
                 {
-                    // Empty hands. Need to collect.
-                    agentStateModule.SwitchState(agentStateModule.collectingState);
+                    agentNavModule.SetDestination(agentTaskModule.GetCurrentTask().taskData.requiredItem.collectSite);
+                    // Empty hands. Need to move to collect location and then collect.
+                    agentStateModule.SwitchState(agentStateModule.displacingState);
                 }
             }
 

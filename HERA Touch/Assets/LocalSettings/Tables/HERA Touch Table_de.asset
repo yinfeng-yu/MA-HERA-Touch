@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 361086574592
-    m_Localized: Benachr.
+    m_Localized: Benachrichtigungen
     m_Metadata:
       m_Items: []
   - m_Id: 738938839040
@@ -96,6 +96,18 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 6476788556357632
     m_Localized: "Die K\xF6rpertemperatur von <> messen"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7531761218084864
+    m_Localized: Auftrag Erteilen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7531926414942208
+    m_Localized: "Auftr\xE4geliste"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7978642180136960
+    m_Localized: Zu einem Ort bewegen
     m_Metadata:
       m_Items: []
   references:

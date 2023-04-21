@@ -4,19 +4,27 @@ using UnityEngine;
 
 namespace HERATouch
 {
+    public enum TaskType
+    {
+        BringWater,
+        MeasureTemperature,
+        MoveToSite,
+    }
+
     [CreateAssetMenu(menuName = "HERA Touch/Task Data")]
     public class TaskData : ScriptableObject
     {
-        public new string name;
         public string description;
+        public TaskType type;
 
         public string buttonLocalRefKey;
         public string bubbleLocalRefKey;
 
-        public List<Subtask> subtasks;
-
-
         public Item requiredItem; // A Glass of water for giving water to patient
+
+        public List<Site> availableSites;
+
+        [SerializeField] public List<Subtask> subtasks;
     }
 
     

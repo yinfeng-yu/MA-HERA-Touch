@@ -64,7 +64,6 @@ public class ScrollSnapRect : MonoBehaviour, IBeginDragHandler, IEndDragHandler,
         // init
         if (_pageCount > 0)
         {
-
             SetPagePositions();
             SetPage(startingPage);
         }

@@ -18,14 +18,14 @@ namespace HERATouch
         }
         #endregion
 
-        public PatientList patientList;
+        public PatientsList patientsList;
 
         public List<string> GetPatientNames()
         {
             List<string> patientNames = new List<string>();
-            for (int i = 0; i < patientList.patients.Count; i++)
+            for (int i = 0; i < patientsList.patients.Count; i++)
             {
-                patientNames.Add(patientList.patients[i].name);
+                patientNames.Add(patientsList.patients[i].name);
             }
             return patientNames;
         }

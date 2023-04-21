@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: HERA Touch Notification_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 1e1135335ee507c439163b32b750c19a, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 11428421632
+    m_Localized: A Glass of Water was brought to {}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 862800830464
+    m_Localized: The measured body temperature of {} is [] degrees
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1074557401161728
+    m_Localized: No Older Notifications
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1084477659930624
+    m_Localized: No Tasks in Progress
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
