@@ -19,11 +19,11 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 11428421632
-    m_Localized: A Glass of Water was brought to {}
+    m_Localized: A Glass of Water was brought to {}.
     m_Metadata:
       m_Items: []
   - m_Id: 862800830464
-    m_Localized: The measured body temperature of {} is [] degrees
+    m_Localized: The measured body temperature of {} is [] degrees.
     m_Metadata:
       m_Items: []
   - m_Id: 1074557401161728
@@ -32,6 +32,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 1084477659930624
     m_Localized: No Tasks in Progress
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1451825218707456
+    m_Localized: Arrived at {}.
     m_Metadata:
       m_Items: []
   references:

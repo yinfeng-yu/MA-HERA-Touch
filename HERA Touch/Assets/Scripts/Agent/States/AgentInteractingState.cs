@@ -20,7 +20,8 @@ namespace HERATouch
         {
             Debug.Log("Start interacting.");
             AgentNavModule agentNavModule = agentStateModule.gameObject.GetComponent<AgentNavModule>();
-            withPatient = agentNavModule.locationsList.IsPatientWard(agentNavModule.destSite);
+
+            withPatient = SitesManager.instance.GetSite(agentNavModule.destSiteEnum).isPatient;
         }
 
         public override void UpdateState(AgentStateModule agentStateModule)
@@ -33,7 +34,7 @@ namespace HERATouch
                 if (_usedTime >= _requiredTime)
                 {
                     // Interaction completed.
-                    if (!withPatient)
+                    if (!withPatient) // Collecting/Returning done.
                     {
                         // Was collecting item.
                         if (agentTaskModule.GetCurrentItem().type == ItemType.None)
@@ -52,11 +53,23 @@ namespace HERATouch
                             agentStateModule.SwitchState(agentStateModule.idleState);
                         }
                     }
-                    else
+                    else // Interacting with patient done.
                     {
                         if (agentTaskModule.GetCurrentItem().shouldBeReturned)
                         {
-                            agentNavModule.SetDestination(agentTaskModule.GetCurrentItem().returnSite);
+                            if (agentTaskModule.GetNextTask() != null)
+                            {
+                                // We don't have to return the item. Just keep using it for the next task.
+                                if (agentTaskModule.GetNextTask().taskData.requiredItem == agentTaskModule.GetCurrentItem())
+                                {
+                                    agentTaskModule.CompleteCurrentTask();
+                                    agentStateModule.SwitchState(agentStateModule.idleState);
+                                    return;
+                                }
+                            }
+                            
+                            agentNavModule.SetDestination(agentTaskModule.GetCurrentItem().returnSiteEnum);
+
                             agentStateModule.SwitchState(agentStateModule.displacingState);
                         }
                         else

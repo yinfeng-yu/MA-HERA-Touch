@@ -13,7 +13,7 @@ namespace HERATouch
     public class AgentTaskModule : MonoBehaviour
     {
         private RobotAgent _robotAgent;
-        private TaskExeMode _taskExeMode = TaskExeMode.ExeNextWhenComplete;
+        // private TaskExeMode _taskExeMode = TaskExeMode.ExeNextWhenComplete;
 
         public List<Task> tasks;
 
@@ -25,8 +25,8 @@ namespace HERATouch
 
         public bool subtaskCompleted = true;
 
-        [SerializeField] private float _requiredTime = 2f;
-        [SerializeField] private float _usedTime = 0f;
+        // [SerializeField] private float _requiredTime = 2f;
+        // [SerializeField] private float _usedTime = 0f;
 
         // Start is called before the first frame update
         void Start()
@@ -101,6 +101,15 @@ namespace HERATouch
             return tasks[0];
         }
 
+        public Task GetNextTask()
+        {
+            if (tasks.Count >= 2)
+            {
+                return tasks[1];
+            }
+            return null;
+        }
+
         public bool HasItem()
         {
             return _itemOnHand.type != ItemType.None;
@@ -133,19 +142,19 @@ namespace HERATouch
 
         public void CompleteCurrentTask()
         {
-            NotificationManager.instance.Notify(GetCurrentTask().GetTaskType(), PatientsManager.instance.GetPatientNames()[GetCurrentTask().patientId], "36.5");
+            NotificationManager.instance.Notify(GetCurrentTask().GetTaskType(), GetCurrentTask().targetSiteEnum, "36.5");
             GetComponent<RobotAgent>().CompleteTask(0);
         }
 
-        public void StartSubtask(float requiredTime = 2f)
-
-        {
-            Debug.Log("start subtask");
-            subtaskCompleted = false;
-            _usedTime = 0f;
-            _requiredTime = requiredTime;
-
-        }
+        // public void StartSubtask(float requiredTime = 2f)
+        // 
+        // {
+        //     Debug.Log("start subtask");
+        //     subtaskCompleted = false;
+        //     _usedTime = 0f;
+        //     _requiredTime = requiredTime;
+        // 
+        // }
 
     }
 }

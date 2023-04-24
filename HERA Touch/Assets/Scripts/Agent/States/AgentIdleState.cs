@@ -29,7 +29,7 @@ namespace HERATouch
                 if (agentTaskModule.HasCorrectItem())
                 {
                     // Skip collecting, head to patient.
-                    agentNavModule.SetDestination(agentTaskModule.GetCurrentTask().patientSite);
+                    agentNavModule.SetDestination(agentTaskModule.GetCurrentTask().targetSiteEnum);
                     agentStateModule.SwitchState(agentStateModule.displacingState);
 
                 }
@@ -37,13 +37,13 @@ namespace HERATouch
                 else if (agentTaskModule.HasItem())
                 {
                     // Have the wrong item. Need to return first.
-                    agentNavModule.SetDestination(agentTaskModule.GetCurrentItem().returnSite);
+                    agentNavModule.SetDestination(agentTaskModule.GetCurrentItem().returnSiteEnum);
                     agentStateModule.SwitchState(agentStateModule.displacingState);
                 }
 
                 else
                 {
-                    agentNavModule.SetDestination(agentTaskModule.GetCurrentTask().taskData.requiredItem.collectSite);
+                    agentNavModule.SetDestination(agentTaskModule.GetCurrentTask().taskData.requiredItem.collectSiteEnum);
                     // Empty hands. Need to move to collect location and then collect.
                     agentStateModule.SwitchState(agentStateModule.displacingState);
                 }

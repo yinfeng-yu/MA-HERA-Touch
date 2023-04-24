@@ -16,11 +16,11 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: 1e1135335ee507c439163b32b750c19a
   m_Entries:
   - m_Id: 11428421632
-    m_Key: Water
+    m_Key: '[Notification List Entry] Water'
     m_Metadata:
       m_Items: []
   - m_Id: 862800830464
-    m_Key: Temperature
+    m_Key: '[Notification List Entry] Temperature'
     m_Metadata:
       m_Items: []
   - m_Id: 1074557401161728
@@ -29,6 +29,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 1084477659930624
     m_Key: No Tasks
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1451825218707456
+    m_Key: '[Notification List Entry] Move'
     m_Metadata:
       m_Items: []
   m_Metadata:

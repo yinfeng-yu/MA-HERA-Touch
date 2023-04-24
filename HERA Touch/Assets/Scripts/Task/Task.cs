@@ -11,26 +11,6 @@ namespace HERATouch
         Completed,
     }
 
-    
-
-    // [Serializable]
-    // public class Subtask
-    // {
-    //     public string name;
-    //     public SubtaskType type;
-    // 
-    //     public Vector3 location;
-    //     public float requiredTime;
-    //     public float usedTime = 0;
-    //     public float progress = 0;
-    // 
-    //     public Subtask(string _name, Vector3 _location, float _requiredTime)
-    //     {
-    //         name = _name;
-    //         location = _location;
-    //         requiredTime = _requiredTime;
-    //     }
-    // }
 
     [Serializable]
     public class Task
@@ -39,14 +19,21 @@ namespace HERATouch
         public TaskStatus taskStatus = TaskStatus.Paused;
 
         public int patientId = -1;
-        public Site patientSite;
+        public SiteEnum targetSiteEnum;
 
-        public Task(TaskData _taskData, int _patientId)
+        public Task(TaskData a_taskData, int a_patientId)
         {
-            taskData = _taskData;
-            patientId = _patientId;
+            taskData = a_taskData;
+            patientId = a_patientId;
 
-            patientSite = PatientsManager.instance.patientsList.patients[_patientId].site;
+            targetSiteEnum = SitesManager.instance.GetPatientSiteEnum(a_patientId);
+        }
+
+        public Task(TaskData a_taskData, SiteEnum a_siteEnum)
+        {
+            taskData = a_taskData;
+
+            targetSiteEnum = a_siteEnum;
         }
 
         public TaskType GetTaskType()

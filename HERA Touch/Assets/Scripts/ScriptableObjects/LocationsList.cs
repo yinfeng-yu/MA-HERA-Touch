@@ -4,17 +4,8 @@ using UnityEngine;
 
 namespace HERATouch
 {
-    public enum Site
-    {
-        AnnasWard,
-        BobsWard,
-        CharliesWard,
-        DavidsWard,
-        EmilysWard,
-        WaterCollectSite,
-        ThermoCollectSite,
-        ThermoReturnSite,
-    }
+    
+
 
     [CreateAssetMenu(menuName = "HERA Touch/Locations List")]
     public class LocationsList : ScriptableObject
@@ -22,27 +13,29 @@ namespace HERATouch
         [Serializable]
         public struct SiteLocPair
         {
-            [MyBox.ConditionalField(nameof(site), false, Site.AnnasWard,
-                                                         Site.BobsWard,
-                                                         Site.CharliesWard,
-                                                         Site.DavidsWard,
-                                                         Site.EmilysWard)]
+            [MyBox.ConditionalField(nameof(site), false, SiteEnum.AnnasWard,
+                                                         SiteEnum.BobsWard,
+                                                         SiteEnum.CharliesWard,
+                                                         SiteEnum.DavidsWard,
+                                                         SiteEnum.EmilysWard)]
             public int patientId;
 
             public Site site;
             public Vector3 location;
         }
 
+        // public List<Site> locations;
+
         public List<SiteLocPair> patientsLocations;
         public List<SiteLocPair> itemsLocations;
 
         public bool IsPatientWard(Site _site)
         {
-            if (_site == Site.AnnasWard    ||
-                _site == Site.BobsWard     ||
-                _site == Site.CharliesWard ||
-                _site == Site.DavidsWard   ||
-                _site == Site.EmilysWard)
+            if (_site.siteEnum == SiteEnum.AnnasWard    ||
+                _site.siteEnum == SiteEnum.BobsWard     ||
+                _site.siteEnum == SiteEnum.CharliesWard ||
+                _site.siteEnum == SiteEnum.DavidsWard   ||
+                _site.siteEnum == SiteEnum.EmilysWard)
             {
                 return true;
             }
@@ -89,7 +82,7 @@ namespace HERATouch
                     return sl.site;
                 }
             }
-            return Site.AnnasWard;
+            return null;
         }
     }
 

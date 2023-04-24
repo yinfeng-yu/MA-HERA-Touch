@@ -29,7 +29,21 @@ namespace HERATouch
             // Has arrived at the destLocation.
             if (Vector3.Distance(agentTransform.position, destLocation) <= 0.1f)
             {
-                agentStateModule.SwitchState(agentStateModule.interactingState);
+                AgentTaskModule agentTaskModule = agentStateModule.gameObject.GetComponent<AgentTaskModule>();
+
+                agentTransform.position = destLocation;
+
+                if (agentTaskModule.GetCurrentItem().type == agentTaskModule.GetCurrentTask().taskData.requiredItem.type &&
+                    agentTaskModule.GetCurrentItem().type == ItemType.None)
+                {
+                    agentTaskModule.CompleteCurrentTask();
+                    agentStateModule.SwitchState(agentStateModule.idleState);
+                }
+                else
+                {
+                    agentStateModule.SwitchState(agentStateModule.interactingState);
+                }
+                
             }
         }
 

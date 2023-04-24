@@ -46,7 +46,7 @@ namespace HERATouch
             patientId = _patientId;
 
             SetEdgeColor(true);
-            GetComponentInChildren<LocalizeStringEvent>().StringReference.SetReference("HERA Touch Table", _taskData.bubbleLocalRefKey);
+            GetComponentInChildren<LocalizeStringEvent>().StringReference.SetReference("Tasks", _taskData.tasksListEntryLocalRefKey);
         }
 
         public void SetEdgeColor(bool start)

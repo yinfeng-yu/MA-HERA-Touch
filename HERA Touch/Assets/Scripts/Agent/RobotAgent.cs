@@ -18,11 +18,6 @@ namespace HERATouch
     {
         public Vector3 position;
 
-        // public AgentState state;
-
-        // public event Action<Task, bool> _tasksChanged;
-        // public event Action _tasksSwapped;
-
         private List<Task> m_tasks;
         private NavMeshAgent m_navAgent;
 

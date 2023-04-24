@@ -30,7 +30,7 @@ namespace HERATouch
             currentState.UpdateState(this);
 
             // Update the agent state UI.
-            UIManager.instance.stateLabel.GetComponentInChildren<LocalizeStringEvent>().StringReference.SetReference("HERA Touch Table", currentState.locRefKey);
+            UIManager.instance.agentStateLabel.GetComponentInChildren<LocalizeStringEvent>().StringReference.SetReference("HERA Touch Table", currentState.locRefKey);
         }
 
         public void SwitchState(AgentBaseState state)

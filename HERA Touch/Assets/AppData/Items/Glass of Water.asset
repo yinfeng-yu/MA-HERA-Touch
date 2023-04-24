@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Glass of Water
   m_EditorClassIdentifier: 
   type: 1
-  collectSite: 5
-  returnSite: 5
+  collectSiteEnum: 5
+  returnSiteEnum: 5
   shouldBeReturned: 0

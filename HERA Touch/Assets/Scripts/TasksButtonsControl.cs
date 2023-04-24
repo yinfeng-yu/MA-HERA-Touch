@@ -28,7 +28,6 @@ namespace HERATouch
                 tasksButtonsContainer.GetComponent<RectTransform>().anchoredPosition = Vector2.Lerp(tasksButtonsContainer.GetComponent<RectTransform>().anchoredPosition,
                                                                                                     m_containerLerpTo,
                                                                                                     snapSpeed * Time.deltaTime);
-                Debug.Log(tasksButtonsContainer.GetComponent<RectTransform>().anchoredPosition);
             }
         }
 

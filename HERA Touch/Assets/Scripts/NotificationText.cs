@@ -7,22 +7,21 @@ namespace HERATouch
 {
     public class NotificationText : MonoBehaviour
     {
-        public string patientName;
-        public string data;
-
         public void UpdateText(string text)
         {
             string nameTagFront = "<color=orange>";
             string dataTagFront = "<color=green>";
             string tagBack = "</color>";
 
+            string taskSiteEnum = SitesManager.instance.GetSiteName(GetComponentInParent<NotificationsListEntry>().notification.taskSiteEnum);
+            string data = GetComponentInParent<NotificationsListEntry>().notification.data;
+
             for (int i = 0; i < text.Length; i++)
             {
                 if (text[i] == '{')
                 {
-                    string updatedText = text.Substring(0, i) + nameTagFront + patientName + tagBack + text.Substring(i + 2, text.Length - i - 2);
+                    string updatedText = text.Substring(0, i) + nameTagFront + taskSiteEnum + tagBack + text.Substring(i + 2, text.Length - i - 2);
                     GetComponent<TextMeshProUGUI>().text = updatedText;
-                    Debug.Log(updatedText);
                 }
             }
 
@@ -33,7 +32,6 @@ namespace HERATouch
                 {
                     string updatedText = curText.Substring(0, i) + dataTagFront + data + tagBack + curText.Substring(i + 2, curText.Length - i - 2);
                     GetComponent<TextMeshProUGUI>().text = updatedText;
-                    Debug.Log(updatedText);
                 }
             }
 

@@ -10,11 +10,11 @@ namespace HERATouch
     {
         private NavMeshAgent navMeshAgent;
 
-        public Site destSite;
+        public SiteEnum destSiteEnum;
         public Vector3 destLocation;
 
         // public Site destinationSite;
-        public LocationsList locationsList;
+        // public LocationsList locationsList;
 
         // Start is called before the first frame update
         void Start()
@@ -32,10 +32,11 @@ namespace HERATouch
             }
         }
 
-        public void SetDestination(Site _destSite)
+        public void SetDestination(SiteEnum a_destSiteEnum)
         {
-            destSite = _destSite;
-            destLocation = locationsList.GetLocation(destSite);
+            destSiteEnum = a_destSiteEnum;
+            Vector3? foundDestLocation = SitesManager.instance.GetLocation(a_destSiteEnum);
+            if (foundDestLocation != null) destLocation = (Vector3) foundDestLocation;
         }
 
         // public void SetDestination(Site _destSite)

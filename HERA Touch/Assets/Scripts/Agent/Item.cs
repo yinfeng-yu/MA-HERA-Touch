@@ -17,10 +17,10 @@ namespace HERATouch
         public ItemType type;
 
         [MyBox.ConditionalField(nameof(type), true, ItemType.None)]
-        public Site collectSite;
+        public SiteEnum collectSiteEnum;
 
         [MyBox.ConditionalField(nameof(type), true, ItemType.None)]
-        public Site returnSite;
+        public SiteEnum returnSiteEnum;
 
         [MyBox.ConditionalField(nameof(type), true, ItemType.None)]
         public bool shouldBeReturned;

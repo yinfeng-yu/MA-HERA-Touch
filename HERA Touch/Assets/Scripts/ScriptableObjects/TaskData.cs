@@ -17,14 +17,22 @@ namespace HERATouch
         public string description;
         public TaskType type;
 
-        public string buttonLocalRefKey;
-        public string bubbleLocalRefKey;
+        public string taskButtonLocalRefKey;
+        public string tasksListEntryLocalRefKey;
 
         public Item requiredItem; // A Glass of water for giving water to patient
 
-        public List<Site> availableSites;
+        public List<SiteEnum> availableTargetSiteEnums;
 
-        [SerializeField] public List<Subtask> subtasks;
+        public List<string> GetAvailableTargetsStringList()
+        {
+            List<string> sl = new List<string>();
+            foreach (var se in availableTargetSiteEnums)
+            {
+                sl.Add(se.ToString());
+            }
+            return sl;
+        }
     }
 
     

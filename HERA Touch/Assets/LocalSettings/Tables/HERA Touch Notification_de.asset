@@ -19,11 +19,11 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 11428421632
-    m_Localized: Ein Glas Wasser wurde zu {} gebracht
+    m_Localized: Ein Glas Wasser wurde zu {} gebracht.
     m_Metadata:
       m_Items: []
   - m_Id: 862800830464
-    m_Localized: "Die gemessene K\xF6rpertemperatur von {} betr\xE4gt [] Grad"
+    m_Localized: "Die gemessene K\xF6rpertemperatur von {} betr\xE4gt [] Grad."
     m_Metadata:
       m_Items: []
   - m_Id: 1074557401161728
@@ -32,6 +32,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 1084477659930624
     m_Localized: "Keine Laufenden Auftr\xE4ge"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1451825218707456
+    m_Localized: Angekommen bei {}.
     m_Metadata:
       m_Items: []
   references:

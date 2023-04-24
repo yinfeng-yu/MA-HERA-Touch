@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Thermometer
   m_EditorClassIdentifier: 
   type: 2
-  collectSite: 6
-  returnSite: 7
+  collectSiteEnum: 6
+  returnSiteEnum: 7
   shouldBeReturned: 1

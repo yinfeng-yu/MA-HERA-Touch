@@ -11,12 +11,12 @@ namespace HERATouch
     {
         public TaskData taskData;
 
-        public TMP_Dropdown patientSelectDropdown;
+        public TMP_Dropdown targetSiteEnumSelectDropdown;
         public Button assignButton;
 
         public TasksButtonsControl tasksButtonsControl;
 
-        private int _selectedPatientId;
+        public SiteEnum m_selectedTargetSiteEnum;
 
         protected override void Start()
         {
@@ -26,10 +26,10 @@ namespace HERATouch
 
             assignButton.onClick.AddListener(() => { AssignTask(); });
 
-            var patientNamesList = PatientsManager.instance.GetPatientNames();
+            var targetsList = taskData.GetAvailableTargetsStringList();
 
-            patientSelectDropdown.ClearOptions();
-            patientSelectDropdown.AddOptions(patientNamesList);
+            targetSiteEnumSelectDropdown.ClearOptions();
+            targetSiteEnumSelectDropdown.AddOptions(targetsList);
 
         }
 
@@ -40,26 +40,19 @@ namespace HERATouch
             EventManager.instance.taskButtonEvents.Selected(_selected);
 
             if (_selected) tasksButtonsControl.LerpTo(-GetComponent<RectTransform>().anchoredPosition.y);
-            // if (GetComponent<Animator>().GetBool("inspected")) GetComponent<Animator>().SetBool("inspected", false);
         }
 
-        private void Update()
+        public void SetTargetSiteEnum(int optionIndex)
         {
-            
-        }
-
-        public void SetPatientId(int patientId)
-        {
-            _selectedPatientId = patientId;
+            m_selectedTargetSiteEnum = taskData.availableTargetSiteEnums[optionIndex];
         }
 
         void AssignTask()
         {
-            Debug.Log("Task Added!");
+            // Debug.Log("Task Added!");
 
-            AgentManager.instance.GetRobotAgent().AddTask(new Task(taskData, _selectedPatientId));
+            AgentManager.instance.GetRobotAgent().AddTask(new Task(taskData, m_selectedTargetSiteEnum));
 
-            // GetComponent<Animator>().SetBool("inspected", false);
             GetComponent<Animator>().SetBool("selected", false);
             EventManager.instance.taskButtonEvents.Selected(false);
         }

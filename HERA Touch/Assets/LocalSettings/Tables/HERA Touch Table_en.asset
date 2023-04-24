@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 361086574592
-    m_Localized: Notification
+    m_Localized: Notifications
     m_Metadata:
       m_Items: []
   - m_Id: 738938839040
@@ -46,28 +46,12 @@ MonoBehaviour:
     m_Localized: Tasks
     m_Metadata:
       m_Items: []
-  - m_Id: 601665680957440
-    m_Localized: Bring a glass of water to patient.
-    m_Metadata:
-      m_Items: []
-  - m_Id: 620182962692096
-    m_Localized: Swipe up to assign task
-    m_Metadata:
-      m_Items: []
   - m_Id: 696666440065024
     m_Localized: Delete
     m_Metadata:
       m_Items: []
-  - m_Id: 788365497589760
-    m_Localized: Move Back
-    m_Metadata:
-      m_Items: []
   - m_Id: 697543146070016
     m_Localized: Pause
-    m_Metadata:
-      m_Items: []
-  - m_Id: 743378663759872
-    m_Localized: Measure the temperature of patient.
     m_Metadata:
       m_Items: []
   - m_Id: 752315056250880
@@ -78,24 +62,8 @@ MonoBehaviour:
     m_Localized: Start
     m_Metadata:
       m_Items: []
-  - m_Id: 788238124965888
-    m_Localized: Move Forward
-    m_Metadata:
-      m_Items: []
   - m_Id: 5126772445143040
     m_Localized: Assign
-    m_Metadata:
-      m_Items: []
-  - m_Id: 5127929221603328
-    m_Localized: Choose a patient
-    m_Metadata:
-      m_Items: []
-  - m_Id: 6236261453914112
-    m_Localized: Bringing water to <>
-    m_Metadata:
-      m_Items: []
-  - m_Id: 6476788556357632
-    m_Localized: Measuring temperature of <>
     m_Metadata:
       m_Items: []
   - m_Id: 7531761218084864
@@ -106,8 +74,8 @@ MonoBehaviour:
     m_Localized: Tasks List
     m_Metadata:
       m_Items: []
-  - m_Id: 7978642180136960
-    m_Localized: Move to a location
+  - m_Id: 9014540074213376
+    m_Localized: Monitoring
     m_Metadata:
       m_Items: []
   references:
