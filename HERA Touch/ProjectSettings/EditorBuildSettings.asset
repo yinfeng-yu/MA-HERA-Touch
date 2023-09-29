@@ -5,11 +5,24 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/[Scene] Main.unity
+    path: Assets/Scenes/Scene_Main.unity
     guid: 4e072433dbec57c4e8953726d74bf1af
   m_configObjects:
+    AR Foundation RemoteARFoundationRemoteLoaderSettings: {fileID: 11400000, guid: ee6222c824eb62b48895d35ea9394824,
+      type: 2}
+    AR Foundation RemoteARFoundationRemoteSessionRecordsData: {fileID: 11400000, guid: 097dcf7bd7175024cb523e9b40e4b474,
+      type: 2}
+    UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: 9aaeddb376c3e384bb33011c25ec7b39,
+      type: 2}
     com.unity.addressableassets: {fileID: 11400000, guid: f60c3b632cc941d489a8a4e7f4c585fe,
       type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: 6cd93373a58fe2c4b8d9b93b8b1a5d97,
+      type: 2}
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: ddc93ea581e826742a58f01d586e6fb3,
+      type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 79eb2cd454aa9914088b5b1df895f256,
       type: 2}

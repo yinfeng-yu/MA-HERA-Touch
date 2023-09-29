@@ -14,7 +14,6 @@ namespace HERATouch
         public Slider progressBar;
         public Image progressBarFill;
 
-        public Task task;
 
         public GameObject taskDescription;
 
@@ -47,14 +46,6 @@ namespace HERATouch
         }
 
 
-        public void Initialize(int a_taskIndex, Task a_task)
-        {
-            taskIndex = a_taskIndex;
-
-            task = a_task;
-
-            taskDescription.GetComponent<LocalizeStringEvent>().StringReference.SetReference("Tasks", task.taskData.tasksListEntryLocalRefKey);
-        }
 
 
     }

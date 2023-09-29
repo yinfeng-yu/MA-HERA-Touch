@@ -12,7 +12,7 @@ namespace HERATouch
         {
             string tagFront = "<color=orange>";
             string tagBack = "</color>";
-            string targetSiteName = SitesManager.instance.GetSiteName(GetComponentInParent<TasksListEntry>().task.targetSiteEnum);
+            string targetSiteName = "";
             string updatedText;
 
             for (int i = 0; i < text.Length; i++)
