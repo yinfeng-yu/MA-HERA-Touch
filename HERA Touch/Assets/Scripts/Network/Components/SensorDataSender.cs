@@ -16,11 +16,6 @@ public class SensorDataSender : MonoBehaviour
 
     public Transform arCamera;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     private void FixedUpdate()
     {
@@ -39,15 +34,8 @@ public class SensorDataSender : MonoBehaviour
     {
         var sensorsData = _sensorsReader.GetSensorsData();
 
-        // Transmitter.Instance.Send(new QuaternionMessage("deviceOrientation", sensorsData.orientation));
-        // Transmitter.Instance.Send(new FloatMessage("deviceRange", sensorsData.range));
-
         // TransmissionManager.Instance.SendTo(new QuaternionMessage("deviceOrientation", sensorsData.orientation), Platform.AR);
         TransmissionManager.Instance.SendTo(new QuaternionMessage("deviceOrientation", arCamera.rotation), Platform.AR);
-        // TransmissionManager.Instance.SendTo(new QuaternionMessage("deviceOrientation", Quaternion.Inverse(arCamera.rotation)), Platform.AR);
-        // TransmissionManager.Instance.SendTo(new QuaternionMessage("deviceOrientation", Quaternion.Inverse(SensorsReader.GyroToUnity(arCamera.rotation))), Platform.AR);
-        // TransmissionManager.Instance.SendTo(new QuaternionMessage("deviceOrientation", ARCameraToObject(arCamera.rotation)), Platform.AR);
-
         TransmissionManager.Instance.SendTo(new Vector3Message("devicePosition", arCamera.localPosition), Platform.AR);
 
         TransmissionManager.Instance.SendTo(new FloatMessage("deviceRange", sensorsData.range), Platform.AR);

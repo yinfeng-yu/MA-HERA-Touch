@@ -9,16 +9,6 @@ public enum CommandType
     Displace,
     Patrol,
     SwitchHand,
-    Steer,
-}
-
-public enum Direction
-{
-    None,
-    Forward,
-    Back,
-    Left,
-    Right,
 }
 
 // Unity serialization does not support derived classes.
@@ -29,6 +19,7 @@ public class Command
     public CommandType type;
 
     // Grab command
+    public bool isGrab;
     public Handedness handedness;
 
     // Displace command
@@ -36,8 +27,6 @@ public class Command
 
     // Patrol waypoints
     public Vector2[] waypoints;
-
-    public Direction direction;
 
     public Command(CommandType a_commandType)
     {

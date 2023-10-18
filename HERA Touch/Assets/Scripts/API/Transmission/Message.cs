@@ -1,8 +1,7 @@
 
 public abstract class Message
 {
-    public abstract string ProduceJsonString();
-
-    public abstract byte[] ProduceData();
+    public abstract string ProduceString();
+    public abstract byte[] ProduceBytes();
 
 }

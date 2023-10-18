@@ -19,10 +19,11 @@ public class CommandSender : MonoBehaviour
     public List<Vector2> waypoints;
     public VisualizeWaypointsOnMap waypointsVisualizer;
 
-    public void SendGrabCommand(Handedness handedness)
+    public void SendGrabCommand(bool isGrab, Handedness handedness)
     {
         Debug.Log("Send Grab Command");
         Command grabCommand = new Command(CommandType.Grab);
+        grabCommand.isGrab = isGrab;
         grabCommand.handedness = handedness;
         TransmissionManager.Instance.SendTo(new CommandMessage(grabCommand), Platform.AR);
     }
@@ -62,10 +63,5 @@ public class CommandSender : MonoBehaviour
         TransmissionManager.Instance.SendTo(new CommandMessage(switchHandCommand), Platform.AR);
     }
 
-    public void SendSteerCommand(int direction)
-    {
-        Command steerCommand = new Command(CommandType.Steer);
-        steerCommand.direction = (Direction) direction;
-        TransmissionManager.Instance.SendTo(new CommandMessage(steerCommand), Platform.AR);
-    }
+    
 }

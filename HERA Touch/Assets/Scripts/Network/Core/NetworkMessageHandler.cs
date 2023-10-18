@@ -19,22 +19,22 @@ public class NetworkMessageHandler : MonoBehaviour
 
             case NetworkMessageType.AwakeMessage:
                 //if this peer hasn't been gone long then fire a recap:
-                if (networkTransmitter.Peers.ContainsKey(currentMessage.a))
+                if (networkTransmitter.peers.ContainsKey(currentMessage.a))
                 {
                     // OnPeerFound?.Invoke(currentMessage.f, long.Parse(currentMessage.d));
-                    networkTransmitter.Peers[currentMessage.a].age = Time.realtimeSinceStartup;
+                    networkTransmitter.peers[currentMessage.a].age = Time.realtimeSinceStartup;
                 }
                 break;
 
             case NetworkMessageType.HeartbeatMessage:
                 //new peer:
-                if (!networkTransmitter.Peers.ContainsKey(currentMessage.a))
+                if (!networkTransmitter.peers.ContainsKey(currentMessage.a))
                 {
-                    networkTransmitter.Peers.Add(currentMessage.a, new Peer(currentMessage.a, currentMessage.f, 0));
+                    networkTransmitter.peers.Add(currentMessage.a, new Peer(currentMessage.a, currentMessage.f, 0));
 
                 }
                 //catalog heartbeat time:
-                networkTransmitter.Peers[currentMessage.a].age = Time.realtimeSinceStartup;
+                networkTransmitter.peers[currentMessage.a].age = Time.realtimeSinceStartup;
                 break;
 
             case NetworkMessageType.NotificationMessage:
@@ -49,6 +49,24 @@ public class NetworkMessageHandler : MonoBehaviour
                 GlobalVariableManager.Instance.GlobalVector3s[receivedVector3Message.l] = receivedVector3Message.v;
                 break;
 
+            case NetworkMessageType.OperationMessage:
+                OperationMessage receivedBaseControlMessage = NetworkUtilities.UnpackMessage<OperationMessage>(rawMessage);
+                HandleOperation(receivedBaseControlMessage.o);
+                break;
+
+        }
+
+        void HandleOperation(Operation operation)
+        {
+
+            switch (operation.type)
+            {
+                case OperationType.SwitchControlMode:
+                    ControlModeManager.Instance.currentControlMode = operation.controlMode;
+                    break;
+                
+
+            }
         }
     }
 }

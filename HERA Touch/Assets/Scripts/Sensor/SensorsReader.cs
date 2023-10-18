@@ -14,7 +14,7 @@ public class SensorsReader : MonoBehaviour
     }
 
     Gyroscope _gyro;
-    [SerializeField] private TextMeshProUGUI text;
+    // [SerializeField] private TextMeshProUGUI text;
 
     // [SerializeField] Transform obj;
     // [SerializeField] Transform pivot;
@@ -28,10 +28,10 @@ public class SensorsReader : MonoBehaviour
     [SerializeField] float velocityThreshold = 0.05f;
     [SerializeField] float accelerationThreshold = 0.04f;
 
-    public Slider rangeSlider;
+    public Slider leftRangeSlider;
+    public Slider rightRangeSlider;
     // public LineRenderer line;
 
-    KalmanFilter kalmanFilter;
     Vector3 velocity;
 
     Vector3 _acceleration;
@@ -51,16 +51,10 @@ public class SensorsReader : MonoBehaviour
         Input.compass.enabled = true;
 
         velocity = Vector3.zero;
-        rangeSlider.value = 0.5f;
+        leftRangeSlider.value = 0.5f;
+        rightRangeSlider.value = 0.5f;
 
         // line.gameObject.SetActive(true);
-
-        kalmanFilter = new KalmanFilter();
-        kalmanFilter.SetQ(0.0001f); // 理想誤差 : 數值越大, 濾波效果越小
-        kalmanFilter.SetR(0.001f);  // 實際誤差
-
-
-        kalmanFilter.SetFirst(-_gyro.userAcceleration.z); // [ 可選 ] 是否要先加入 "前一個" 值
 
     }
 
@@ -149,13 +143,13 @@ public class SensorsReader : MonoBehaviour
         // hand.rotation = obj.rotation;
 
 
-        text.text = $"Gyro Rotation Rate \nX={_gyro.rotationRate.x:#0.00} Y={_gyro.rotationRate.y:#0.00} Z={_gyro.rotationRate.z:#0.00}\n\n" +
-                        $"Acceleration\nX={_acceleration.x:#0.00} Y={_acceleration.y:#0.00} Z={_acceleration.z:#0.00}\n\n" +
-                            $"Attitude\nX={_gyro.attitude.x:#0.00} Y={_gyro.attitude.y:#0.00} Z={_gyro.attitude.z:#0.00} W={_gyro.attitude.w:#0.00}\n\n" +
-                             $"Gravity\nX={_gravity.x:#0.00} Y={_gravity.y:#0.00} Z={_gravity.z:#0.00}\n\n" +
-                             $"User Acceleration\nX={_gyro.userAcceleration.x:#0.00} Y={_gyro.userAcceleration.y:#0.00} Z={_gyro.userAcceleration.z:#0.00}\n\n" +
-                             // $"World User Acceleration\nX={_worldUserAcceleration.x:#0.00} Y={_worldUserAcceleration.y:#0.00} Z={_worldUserAcceleration.z:#0.00}\n\n" +
-                             $"Velocity\nX={velocity.x:#0.00} Y={velocity.y:#0.00} Z={velocity.z:#0.00}\n\n";
+        // text.text = $"Gyro Rotation Rate \nX={_gyro.rotationRate.x:#0.00} Y={_gyro.rotationRate.y:#0.00} Z={_gyro.rotationRate.z:#0.00}\n\n" +
+        //                 $"Acceleration\nX={_acceleration.x:#0.00} Y={_acceleration.y:#0.00} Z={_acceleration.z:#0.00}\n\n" +
+        //                     $"Attitude\nX={_gyro.attitude.x:#0.00} Y={_gyro.attitude.y:#0.00} Z={_gyro.attitude.z:#0.00} W={_gyro.attitude.w:#0.00}\n\n" +
+        //                      $"Gravity\nX={_gravity.x:#0.00} Y={_gravity.y:#0.00} Z={_gravity.z:#0.00}\n\n" +
+        //                      $"User Acceleration\nX={_gyro.userAcceleration.x:#0.00} Y={_gyro.userAcceleration.y:#0.00} Z={_gyro.userAcceleration.z:#0.00}\n\n" +
+        //                      // $"World User Acceleration\nX={_worldUserAcceleration.x:#0.00} Y={_worldUserAcceleration.y:#0.00} Z={_worldUserAcceleration.z:#0.00}\n\n" +
+        //                      $"Velocity\nX={velocity.x:#0.00} Y={velocity.y:#0.00} Z={velocity.z:#0.00}\n\n";
 
         
         // obj.rotation = _orientation;
@@ -191,10 +185,23 @@ public class SensorsReader : MonoBehaviour
 
     void ReadSlider()
     {
-        if (rangeSlider.value > 0.5f)
+        // if (rangeSlider.value > 0.5f)
+        // {
+        //     rangeSlider.value = 0.5f;
+        // }
+        // range = minRange + rangeSlider.value * 2 * (maxRange - minRange);
+        if (leftRangeSlider.IsActive())
         {
-            rangeSlider.value = 0.5f;
+            range = leftRangeSlider.value;
+            leftRangeSlider.GetComponentInChildren<TextMeshProUGUI>().text = ((int)(leftRangeSlider.value * 100)).ToString() + '%';
         }
-        range = minRange + rangeSlider.value * 2 * (maxRange - minRange);
+        else
+        {
+            range = rightRangeSlider.value;
+            rightRangeSlider.GetComponentInChildren<TextMeshProUGUI>().text = ((int)(rightRangeSlider.value * 100)).ToString() + '%';
+        }
+
+
+        
     }
 }
