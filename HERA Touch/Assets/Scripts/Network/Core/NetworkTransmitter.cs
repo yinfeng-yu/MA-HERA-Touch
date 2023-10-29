@@ -29,7 +29,7 @@ public class Peer
 public class NetworkTransmitter : Transmitter
 {
     //Public Variables:
-    public int Port = 23000;
+    public int port = 23000;
 
     // For Unity Editor debug use
     public int SendPort = 23001;
@@ -83,9 +83,10 @@ public class NetworkTransmitter : Transmitter
 #if UNITY_EDITOR
                 _udpClient = new UdpClient(ReceivePort);
 #else
-                udpClient = new UdpClient(Port);
+                _udpClient = new UdpClient(port);
 #endif
-
+                _udpClient.ExclusiveAddressUse = false;
+                _udpClient.EnableBroadcast = true;
                 _udpClient.Client.SendBufferSize = bufferSize;
                 _udpClient.Client.ReceiveBufferSize = bufferSize;
                 socketOpen = true;
@@ -239,7 +240,7 @@ public class NetworkTransmitter : Transmitter
         IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, SendPort);
         // _udpClient = new UdpClient(instance.receivePort);
 #else
-        IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, instance.port);
+        IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, port);
 #endif
 
         // Size check:
@@ -268,6 +269,7 @@ public class NetworkTransmitter : Transmitter
         else
         {
             endPoint.Address = IPAddress.Parse(networkMessage.t);
+           //  endPoint.Address = IPAddress.Any;
             _udpClient.Send(data, data.Length, endPoint);
 
             // Debug:
