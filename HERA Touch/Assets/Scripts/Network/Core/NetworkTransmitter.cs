@@ -81,14 +81,20 @@ public class NetworkTransmitter : Transmitter
             try
             {
 #if UNITY_EDITOR
-                _udpClient = new UdpClient(ReceivePort);
+                _udpClient = new UdpClient(ReceivePort)
+                {
+                    EnableBroadcast = true
+                };
 #else
-                _udpClient = new UdpClient(port);
+
+                udpClient = new UdpClient(Port)
+                {
+                    EnableBroadcast = true
+                };
 #endif
-                _udpClient.ExclusiveAddressUse = false;
-                _udpClient.EnableBroadcast = true;
                 _udpClient.Client.SendBufferSize = bufferSize;
                 _udpClient.Client.ReceiveBufferSize = bufferSize;
+                // _udpClient.EnableBroadcast = true;
                 socketOpen = true;
             }
             catch (Exception)
@@ -170,32 +176,32 @@ public class NetworkTransmitter : Transmitter
                 bool needToParse = true;
 
                 //reliable message?
-                if (currentMessage.r == 1)
-                {
-                    if (_confirmedReliableMessages.Contains(currentMessage.g))
-                    {
-                        //we have previously consumed this message but the confirmation failed so we only
-                        //need to focus on sending another confirmation:
-                        needToParse = false;
-                        continue;
-                    }
-                    else
-                    {
-                        //mark this reliable message as confirmed:
-                        _confirmedReliableMessages.Add(currentMessage.g);
-                    }
-
-                    //send back confirmation message with same guid:
-                    NetworkMessage confirmationMessage = new NetworkMessage(
-                        NetworkMessageType.ConfirmedMessage,
-                        NetworkAudience.SinglePeer,
-                        currentMessage.f,
-                        false,
-                        "",
-                        currentMessage.g);
-
-                    Send(confirmationMessage);
-                }
+                // if (currentMessage.r == 1)
+                // {
+                //     if (_confirmedReliableMessages.Contains(currentMessage.g))
+                //     {
+                //         //we have previously consumed this message but the confirmation failed so we only
+                //         //need to focus on sending another confirmation:
+                //         needToParse = false;
+                //         continue;
+                //     }
+                //     else
+                //     {
+                //         //mark this reliable message as confirmed:
+                //         _confirmedReliableMessages.Add(currentMessage.g);
+                //     }
+                // 
+                //     //send back confirmation message with same guid:
+                //     NetworkMessage confirmationMessage = new NetworkMessage(
+                //         NetworkMessageType.ConfirmedMessage,
+                //         NetworkAudience.SinglePeer,
+                //         currentMessage.f,
+                //         false,
+                //         "",
+                //         currentMessage.g);
+                // 
+                //     Send(confirmationMessage);
+                // }
 
                 //parsing needed?
                 if (!needToParse)
@@ -237,10 +243,11 @@ public class NetworkTransmitter : Transmitter
         byte[] data = message.ProduceBytes();
 
 #if UNITY_EDITOR
-        IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, SendPort);
-        // _udpClient = new UdpClient(instance.receivePort);
+        IPEndPoint endPoint = new IPEndPoint(IPAddress.Broadcast, SendPort);
+        // var _udpClient2 = new UdpClient(SendPort);
 #else
-        IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, port);
+
+        IPEndPoint endPoint = new IPEndPoint(IPAddress.Broadcast, Port);
 #endif
 
         // Size check:
@@ -268,8 +275,10 @@ public class NetworkTransmitter : Transmitter
         }
         else
         {
-            endPoint.Address = IPAddress.Parse(networkMessage.t);
-           //  endPoint.Address = IPAddress.Any;
+            // endPoint.Address = IPAddress.Parse("255.255.255.255");
+            // endPoint.Address = IPAddress.Parse(networkMessage.t);
+            endPoint.Address = IPAddress.Broadcast;
+            // Debug.Log($"to: {networkMessage.t}, endPoint: {endPoint.Address}");
             _udpClient.Send(data, data.Length, endPoint);
 
             // Debug:
