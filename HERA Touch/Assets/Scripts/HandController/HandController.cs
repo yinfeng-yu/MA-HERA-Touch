@@ -3,35 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// This enum is defined the same way as that of MRTK
+/// This enum is defined the same way as that of AR Environment
 /// </summary>
-public enum Handedness : byte
+public enum Handedness
 {
-    /// <summary>
-    /// No hand specified by the SDK for the controller
-    /// </summary>
-    None = 0 << 0,
-    /// <summary>
-    /// The controller is identified as being provided in a Left hand
-    /// </summary>
-    Left = 1 << 0,
-    /// <summary>
-    /// The controller is identified as being provided in a Right hand
-    /// </summary>
-    Right = 1 << 1,
-    /// <summary>
-    /// The controller is identified as being either left and/or right handed.
-    /// </summary>
-    Both = Left | Right,
-    /// <summary>
-    /// Reserved, for systems that provide alternate hand state.
-    /// </summary>
-    Other = 1 << 2,
-    /// <summary>
-    /// Global catchall, used to map actions to any controller (provided the controller supports it)
-    /// </summary>
-    /// <remarks>Note, by default the specific hand actions will override settings mapped as both</remarks>
-    Any = Other | Left | Right,
+    Left,
+    Right,
+    Both,
 }
 
 public class HandController : MonoBehaviour
@@ -49,10 +27,6 @@ public class HandController : MonoBehaviour
     public Handedness handedness = Handedness.Left;
 
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()

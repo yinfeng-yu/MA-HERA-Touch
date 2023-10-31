@@ -32,8 +32,8 @@ public class NetworkTransmitter : Transmitter
     public int Port = 23000;
 
     // For Unity Editor debug use
-    public int SendPort = 23001;
-    public int ReceivePort = 23002;
+    public int SendPort = 23000;
+    public int ReceivePort = 23000;
 
     public int bufferSize = 2048;
 
@@ -86,7 +86,7 @@ public class NetworkTransmitter : Transmitter
                     EnableBroadcast = true
                 };
 #else
-                udpClient = new UdpClient(Port)
+                _udpClient = new UdpClient(Port)
                 {
                     EnableBroadcast = true
                 };
