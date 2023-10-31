@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 [Serializable]
@@ -17,19 +18,25 @@ public enum ControlMode
 public class ControlModeManager : Singleton<ControlModeManager>
 {
     public ControlMode currentControlMode;
-    public GameObject smartPhoneControllerPage;
+    public GameObject smartPhoneControllerPagePointer;
+    public GameObject smartPhoneControllerPageMotionTracking;
 
 
     // Update is called once per frame
     void Update()
     {
-        if (currentControlMode == ControlMode.Smartphone || currentControlMode == ControlMode.SmartphonePointer)
+        if (currentControlMode == ControlMode.SmartphonePointer)
         {
-            smartPhoneControllerPage.SetActive(true);
+            smartPhoneControllerPagePointer.SetActive(true);
+        }
+        else if (currentControlMode == ControlMode.Smartphone)
+        {
+            smartPhoneControllerPageMotionTracking.SetActive(true);
         }
         else
         {
-            smartPhoneControllerPage.SetActive(false);
+            smartPhoneControllerPageMotionTracking.SetActive(false);
+            smartPhoneControllerPagePointer.SetActive(false);
         }
     }
 
