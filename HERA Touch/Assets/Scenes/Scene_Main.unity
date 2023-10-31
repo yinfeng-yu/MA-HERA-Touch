@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0113067515, g: 0.022537297, b: 0.031051585, a: 1}
+  m_IndirectSpecularColor: {r: 0.011322045, g: 0.022567706, b: 0.03109742, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -23936,8 +23936,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Port: 23000
-  SendPort: 23003
-  ReceivePort: 23001
+  SendPort: 23000
+  ReceivePort: 23000
   bufferSize: 2048
   debugOutgoing: 0
   debugIncoming: 0
@@ -45835,7 +45835,7 @@ MonoBehaviour:
   rightHandControl: {fileID: 176677234}
   leftGrabButton: {fileID: 234925639}
   rightGrabButton: {fileID: 0}
-  handedness: 1
+  handedness: 0
 --- !u!4 &1404084833
 Transform:
   m_ObjectHideFlags: 0
@@ -47490,7 +47490,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1435356193}
   m_OnClick:
     m_PersistentCalls:

@@ -21,10 +21,11 @@ public class CommandSender : MonoBehaviour
 
     public void SendGrabCommand(bool isGrab, Handedness handedness)
     {
-        Debug.Log("Send Grab Command");
+        
         Command grabCommand = new Command(CommandType.Grab);
         grabCommand.isGrab = isGrab;
         grabCommand.handedness = handedness;
+        Debug.Log($"Send Grab Command: handedness: {grabCommand.handedness}");
         TransmissionManager.Instance.SendTo(new CommandMessage(grabCommand), Platform.AR);
     }
 
