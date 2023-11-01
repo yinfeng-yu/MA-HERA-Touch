@@ -10050,7 +10050,6 @@ MonoBehaviour:
   angles: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0}
   startPos: {x: 0, y: 0, z: 0}
-  posScale: 10
 --- !u!4 &261767058
 Transform:
   m_ObjectHideFlags: 0
@@ -40021,6 +40020,7 @@ MonoBehaviour:
   smartPhoneControllerPagePointer: {fileID: 820975167}
   smartPhoneControllerPageMotionTracking: {fileID: 193182121}
   smartPhoneControllerPageSteer: {fileID: 571359397}
+  smartPhoneControllerPageHandTracking: {fileID: 1113374977}
 --- !u!4 &1107934149
 Transform:
   m_ObjectHideFlags: 0

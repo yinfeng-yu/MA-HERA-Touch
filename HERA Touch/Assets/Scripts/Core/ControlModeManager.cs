@@ -21,6 +21,7 @@ public class ControlModeManager : Singleton<ControlModeManager>
     public GameObject smartPhoneControllerPagePointer;
     public GameObject smartPhoneControllerPageMotionTracking;
     public GameObject smartPhoneControllerPageSteer;
+    public GameObject smartPhoneControllerPageHandTracking;
 
 
     // Update is called once per frame
@@ -38,11 +39,16 @@ public class ControlModeManager : Singleton<ControlModeManager>
         {
             smartPhoneControllerPageSteer.SetActive(true);
         }
+        else if (currentControlMode == ControlMode.HandTracking)
+        {
+            smartPhoneControllerPageHandTracking.SetActive(true);
+        }
         else
         {
             smartPhoneControllerPageMotionTracking.SetActive(false);
             smartPhoneControllerPagePointer.SetActive(false);
             smartPhoneControllerPageSteer.SetActive(false);
+            smartPhoneControllerPageHandTracking.SetActive(false);
         }
     }
 
