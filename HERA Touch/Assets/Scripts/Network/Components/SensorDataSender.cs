@@ -16,6 +16,8 @@ public class SensorDataSender : MonoBehaviour
 
     public Transform arCamera;
 
+    public Transform phonePose;
+
 
     private void FixedUpdate()
     {
@@ -33,11 +35,14 @@ public class SensorDataSender : MonoBehaviour
     void SendSensorData()
     {
         var sensorsData = _sensorsReader.GetSensorsData();
-
         // TransmissionManager.Instance.SendTo(new QuaternionMessage("deviceOrientation", sensorsData.orientation), Platform.AR);
-        TransmissionManager.Instance.SendTo(new QuaternionMessage("deviceOrientation", arCamera.rotation), Platform.AR);
-        TransmissionManager.Instance.SendTo(new Vector3Message("devicePosition", arCamera.localPosition), Platform.AR);
 
+        // TransmissionManager.Instance.SendTo(new QuaternionMessage("deviceOrientation", arCamera.rotation), Platform.AR);
+        // TransmissionManager.Instance.SendTo(new Vector3Message("devicePosition", arCamera.localPosition), Platform.AR);
+        // TransmissionManager.Instance.SendTo(new FloatMessage("deviceRange", sensorsData.range), Platform.AR);
+
+        TransmissionManager.Instance.SendTo(new QuaternionMessage("deviceOrientation", phonePose.rotation), Platform.AR);
+        TransmissionManager.Instance.SendTo(new Vector3Message("devicePosition", phonePose.position), Platform.AR);
         TransmissionManager.Instance.SendTo(new FloatMessage("deviceRange", sensorsData.range), Platform.AR);
 
     }

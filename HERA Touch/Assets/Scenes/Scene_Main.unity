@@ -43610,6 +43610,7 @@ MonoBehaviour:
   frequency: 24
   _sensorsReader: {fileID: 991939820}
   arCamera: {fileID: 1608052130}
+  phonePose: {fileID: 261767058}
 --- !u!224 &1191134976
 RectTransform:
   m_ObjectHideFlags: 0
