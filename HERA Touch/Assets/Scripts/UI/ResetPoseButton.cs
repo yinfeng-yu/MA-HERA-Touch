@@ -8,6 +8,7 @@ public class ResetPoseButton : MonoBehaviour, IPointerDownHandler
 {
     public Transform arCamera;
     public Quaternion rotation;
+    public Vector3 position;
 
     private Button _button;
 
@@ -19,6 +20,7 @@ public class ResetPoseButton : MonoBehaviour, IPointerDownHandler
     private void Update()
     {
         Quaternion cameraRot = arCamera.rotation;
+
         if (Mathf.Abs(cameraRot.eulerAngles.x) < 45f && Mathf.Abs(cameraRot.eulerAngles.z) < 45f) 
         {
             _button.interactable = true;
@@ -32,8 +34,8 @@ public class ResetPoseButton : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         rotation = arCamera.rotation;
-
-        Debug.Log($"eulers: {rotation}");
+        position = arCamera.position;
+        // Debug.Log($"eulers: {rotation}");
         // phone.Rotate(0, -eulers.y, 0);
         // phone.rotation = Quaternion.Euler(eulers.x, 0, eulers.z);
     }

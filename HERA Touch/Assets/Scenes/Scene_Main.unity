@@ -4776,8 +4776,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -286}
-  m_SizeDelta: {x: 0, y: -572}
+  m_AnchoredPosition: {x: 0, y: -236}
+  m_SizeDelta: {x: 0, y: -472}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &129353872
 MonoBehaviour:
@@ -10026,7 +10026,7 @@ GameObject:
   m_Component:
   - component: {fileID: 261767058}
   - component: {fileID: 261767057}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: IPhone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10045,9 +10045,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d47ae72f809f9004b92d699c200a83b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ARCamera: {fileID: 1608052130}
   resetPoseButton: {fileID: 1084332141}
   angles: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0}
+  startPos: {x: 0, y: 0, z: 0}
+  posScale: 10
 --- !u!4 &261767058
 Transform:
   m_ObjectHideFlags: 0
@@ -10056,7 +10059,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 261767056}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1000, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12240,7 +12243,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &344418244
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15827,7 +15830,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &443285461
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15845,7 +15848,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -100}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 828, y: 472}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &443285462
@@ -16172,7 +16175,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -100}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 828, y: 472}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &455312221
@@ -38765,7 +38768,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1084332137
 RectTransform:
   m_ObjectHideFlags: 0
@@ -38883,6 +38886,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arCamera: {fileID: 1608052130}
   rotation: {x: 0, y: 0, z: 0, w: 0}
+  position: {x: 0, y: 0, z: 0}
 --- !u!1 &1088734145
 GameObject:
   m_ObjectHideFlags: 0
@@ -52430,7 +52434,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1434457013
 RectTransform:
   m_ObjectHideFlags: 0
@@ -61624,7 +61628,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1722182005
 RectTransform:
   m_ObjectHideFlags: 0
@@ -66582,7 +66586,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1837768783
 RectTransform:
   m_ObjectHideFlags: 0
@@ -71591,6 +71595,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 261767058}
     m_Modifications:
+    - target: {fileID: -8729582633299945281, guid: 73423d627faa35746b841142a679b7af,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 73423d627faa35746b841142a679b7af,
         type: 3}
       propertyPath: m_RootOrder
@@ -71650,6 +71659,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: iPhone 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 73423d627faa35746b841142a679b7af,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8821623529969584324, guid: 73423d627faa35746b841142a679b7af,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73423d627faa35746b841142a679b7af, type: 3}
@@ -74233,7 +74252,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -100}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 828, y: 472}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &2066332076
