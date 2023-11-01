@@ -10,7 +10,7 @@ public class Test : MonoBehaviour
     public Vector3 rotation;
 
     public Vector3 startPos;
-    public float posScale = 10f;
+
     private void Start()
     {
         startPos = transform.position;   
@@ -24,7 +24,7 @@ public class Test : MonoBehaviour
         transform.rotation = ARCamera.rotation;
         transform.rotation = Quaternion.Euler(Vector3.up * -resetPoseButton.rotation.eulerAngles.y) * transform.rotation;
 
-        transform.position = startPos  - resetPoseButton.position * posScale + (Quaternion.Euler(Vector3.up * -resetPoseButton.rotation.eulerAngles.y) * ARCamera.position) * posScale;
+        transform.position = startPos  - resetPoseButton.position + (Quaternion.Euler(Vector3.up * -resetPoseButton.rotation.eulerAngles.y) * ARCamera.position);
         // transform.Rotate(0, 0, -resetPoseButton.eulers.z);
     }
 }
