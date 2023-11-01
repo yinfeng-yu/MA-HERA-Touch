@@ -24,7 +24,7 @@ public class Test : MonoBehaviour
         transform.rotation = ARCamera.rotation;
         transform.rotation = Quaternion.Euler(Vector3.up * -resetPoseButton.rotation.eulerAngles.y) * transform.rotation;
 
-        transform.position = startPos + ARCamera.position * posScale - resetPoseButton.position * posScale;
+        transform.position = startPos  - resetPoseButton.position * posScale + (Quaternion.Euler(Vector3.up * -resetPoseButton.rotation.eulerAngles.y) * ARCamera.position) * posScale;
         // transform.Rotate(0, 0, -resetPoseButton.eulers.z);
     }
 }
