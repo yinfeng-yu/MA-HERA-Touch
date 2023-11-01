@@ -40020,7 +40020,7 @@ MonoBehaviour:
   currentControlMode: 0
   smartPhoneControllerPagePointer: {fileID: 820975167}
   smartPhoneControllerPageMotionTracking: {fileID: 193182121}
-  smartPhoneControllerPageSteer: {fileID: 0}
+  smartPhoneControllerPageSteer: {fileID: 571359397}
 --- !u!4 &1107934149
 Transform:
   m_ObjectHideFlags: 0
