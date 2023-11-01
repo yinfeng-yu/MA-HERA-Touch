@@ -32,8 +32,8 @@ public class NetworkTransmitter : Transmitter
     public int Port = 23000;
 
     // For Unity Editor debug use
-    public int SendPort = 23000;
-    public int ReceivePort = 23000;
+    public int SendPort = 23001;
+    public int ReceivePort = 23002;
 
     public int bufferSize = 2048;
 
@@ -60,6 +60,8 @@ public class NetworkTransmitter : Transmitter
     public List<string> _confirmedReliableMessages = new List<string>();
     private static Dictionary<string, NetworkMessage> _unconfirmedReliableMessages = new Dictionary<string, NetworkMessage>();
 
+    // public string appKey;
+
     public Dictionary<string, Peer> peers
     {
         get => _peers;
@@ -81,21 +83,13 @@ public class NetworkTransmitter : Transmitter
             try
             {
 #if UNITY_EDITOR
-                _udpClient = new UdpClient(ReceivePort)
-                {
-                    EnableBroadcast = true
-                };
+                _udpClient = new UdpClient(ReceivePort);
 #else
-                _udpClient = new UdpClient(Port)
-                {
-                    EnableBroadcast = true
-                };
+                udpClient = new UdpClient(Port);
 #endif
 
-                // _udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, true);
                 _udpClient.Client.SendBufferSize = bufferSize;
                 _udpClient.Client.ReceiveBufferSize = bufferSize;
-                // _udpClient.EnableBroadcast = true;
                 socketOpen = true;
             }
             catch (Exception)
@@ -115,6 +109,7 @@ public class NetworkTransmitter : Transmitter
         Send(new NetworkMessage(NetworkMessageType.AwakeMessage, NetworkAudience.NetworkBroadcast, "", true, _age.ToString()));
 
         StartCoroutine(Heartbeat());
+        StartCoroutine(ReliableRetry());
     }
     private void OnDestroy()
     {
@@ -144,7 +139,7 @@ public class NetworkTransmitter : Transmitter
             //get raw message for key evaluation:
             string serialized = Encoding.UTF8.GetString(bytes);
 
-            // NetworkMessage rawMessage = JsonUtility.FromJson<NetworkMessage>(serialized);
+            NetworkMessage rawMessage = JsonUtility.FromJson<NetworkMessage>(serialized);
 
             // keys evaluations:
             // if (rawMessage.a != instance.appKey)
@@ -152,7 +147,11 @@ public class NetworkTransmitter : Transmitter
             //     //we send the serialized string for easier debug messages:
             //     _receivedMessages.Add(serialized);
             // }
-            _receivedMessages.Add(serialized);
+
+            if (rawMessage.f != NetworkUtilities.MyAddress)
+            {
+                _receivedMessages.Add(serialized);
+            }
 
         }
     }
@@ -168,41 +167,50 @@ public class NetworkTransmitter : Transmitter
                 NetworkMessage currentMessage = JsonUtility.FromJson<NetworkMessage>(rawMessage);
 
                 // debug:
-                if (debugIncoming)
+                if (debugIncoming && currentMessage.f != NetworkUtilities.MyAddress)
                 {
                     Debug.Log($"Received {rawMessage} from {currentMessage.f}");
                 }
 
-                //parse status:
+
+                // parse status:
                 bool needToParse = true;
 
-                //reliable message?
-                // if (currentMessage.r == 1)
-                // {
-                //     if (_confirmedReliableMessages.Contains(currentMessage.g))
-                //     {
-                //         //we have previously consumed this message but the confirmation failed so we only
-                //         //need to focus on sending another confirmation:
-                //         needToParse = false;
-                //         continue;
-                //     }
-                //     else
-                //     {
-                //         //mark this reliable message as confirmed:
-                //         _confirmedReliableMessages.Add(currentMessage.g);
-                //     }
-                // 
-                //     //send back confirmation message with same guid:
-                //     NetworkMessage confirmationMessage = new NetworkMessage(
-                //         NetworkMessageType.ConfirmedMessage,
-                //         NetworkAudience.SinglePeer,
-                //         currentMessage.f,
-                //         false,
-                //         "",
-                //         currentMessage.g);
-                // 
-                //     Send(confirmationMessage);
-                // }
+                // reliable message?
+                if (currentMessage.r == 1)
+                {
+                    if (_confirmedReliableMessages.Contains(currentMessage.g))
+                    {
+                        // we have previously consumed this message but the confirmation failed so we only
+                        // need to focus on sending another confirmation:
+                        needToParse = false;
+                        // continue;
+                    }
+                    else
+                    {
+                        // mark this reliable message as confirmed:
+                        _confirmedReliableMessages.Add(currentMessage.g);
+                    }
+
+                    //send back confirmation message with same guid:
+                    NetworkMessage confirmationMessage = new NetworkMessage(
+                        NetworkMessageType.ConfirmedMessage,
+                        NetworkAudience.NetworkBroadcast,
+                        currentMessage.f,
+                        false,
+                        "",
+                        currentMessage.g);
+
+                    Send(confirmationMessage);
+                }
+
+                if (currentMessage.ty == (short)NetworkMessageType.ConfirmedMessage)
+                {
+                    //confirmed!
+                    _unconfirmedReliableMessages.Remove(currentMessage.g);
+                    // OnSendMessageSuccess?.Invoke(currentMessage.g);
+                    needToParse = false;
+                }
 
                 //parsing needed?
                 if (!needToParse)
@@ -221,20 +229,20 @@ public class NetworkTransmitter : Transmitter
     {
         NetworkMessage networkMessage = (NetworkMessage)message;
 
-        //reliable logging:
+        // reliable logging:
         if (networkMessage.r == 1)
         {
             if (!_unconfirmedReliableMessages.ContainsKey(networkMessage.g))
             {
-                // set target counts:
-                if (string.IsNullOrEmpty(networkMessage.t))
-                {
-                    networkMessage.ts = _peers.Count;
-                }
-                else
-                {
-                    networkMessage.ts = 1;
-                }
+                // // set target counts:
+                // if (string.IsNullOrEmpty(networkMessage.t))
+                // {
+                //     networkMessage.ts = _peers.Count;
+                // }
+                // else
+                // {
+                //     networkMessage.ts = 1;
+                // }
 
                 _unconfirmedReliableMessages.Add(networkMessage.g, networkMessage);
             }
@@ -244,10 +252,10 @@ public class NetworkTransmitter : Transmitter
         byte[] data = message.ProduceBytes();
 
 #if UNITY_EDITOR
-        IPEndPoint endPoint = new IPEndPoint(IPAddress.Broadcast, SendPort);
-        // var _udpClient2 = new UdpClient(SendPort);
+        IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, SendPort);
+        // _udpClient = new UdpClient(instance.receivePort);
 #else
-        IPEndPoint endPoint = new IPEndPoint(IPAddress.Broadcast, Port);
+        IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, instance.port);
 #endif
 
         // Size check:
@@ -275,10 +283,7 @@ public class NetworkTransmitter : Transmitter
         }
         else
         {
-            // endPoint.Address = IPAddress.Parse("255.255.255.255");
-            // endPoint.Address = IPAddress.Parse(networkMessage.t);
-            endPoint.Address = IPAddress.Broadcast;
-            // Debug.Log($"to: {networkMessage.t}, endPoint: {endPoint.Address}");
+            endPoint.Address = IPAddress.Parse(networkMessage.t);
             _udpClient.Send(data, data.Length, endPoint);
 
             // Debug:
@@ -294,26 +299,28 @@ public class NetworkTransmitter : Transmitter
     {
         while (true)
         {
-            //iterate a copy so we don't have issues with inbound confirmations:
+            // iterate a copy so we don't have issues with inbound confirmations:
             foreach (var item in _unconfirmedReliableMessages.Values.ToArray())
             {
-                if (Time.realtimeSinceStartup - item.ti < _maxResendDuration)
-                {
-                    //resend:
-                    Send(item);
-                }
-                else
-                {
-                    //TODO: add explict list of who didn't get it for KnownPeers intended messages:
-                    //reliable message send failed - only if we have some targets left, otherwise there 
-                    //were no recipients to begin with which easily happens if someone attempted a KnownPeers
-                    //send when no one was around:
-                    if (item.ts != 0)
-                    {
-                        // instance.OnSendMessageFailure?.Invoke(item.g);
-                    }
-                    _unconfirmedReliableMessages.Remove(item.g);
-                }
+                // if (Time.realtimeSinceStartup - item.ti < _maxResendDuration)
+                // {
+                //     // resend:
+                //     Send(item);
+                // }
+                // else
+                // {
+                //     //TODO: add explict list of who didn't get it for KnownPeers intended messages:
+                //     //reliable message send failed - only if we have some targets left, otherwise there 
+                //     //were no recipients to begin with which easily happens if someone attempted a KnownPeers
+                //     //send when no one was around:
+                //     if (item.ts != 0)
+                //     {
+                //         // instance.OnSendMessageFailure?.Invoke(item.g);
+                //     }
+                //     _unconfirmedReliableMessages.Remove(item.g);
+                // }
+
+                Send(item);
             }
 
             //loop:
