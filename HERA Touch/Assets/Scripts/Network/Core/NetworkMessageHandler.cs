@@ -54,6 +54,11 @@ public class NetworkMessageHandler : MonoBehaviour
                 HandleOperation(receivedBaseControlMessage.o);
                 break;
 
+            case NetworkMessageType.CommandMessage:
+                CommandMessage receivedCommandMessage = NetworkUtilities.UnpackMessage<CommandMessage>(rawMessage);
+                HandController.Instance.SwitchHand();
+                break;
+
         }
 
         void HandleOperation(Operation operation)
