@@ -277,7 +277,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.389}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -6055,7 +6055,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 167310950}
-  - component: {fileID: 167310951}
   m_Layer: 5
   m_Name: Left Hand Control
   m_TagString: Untagged
@@ -6085,19 +6084,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &167310951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 167310949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74f03fa34dacea348b0ecf96f04c7053, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  handedness: 0
 --- !u!1 &167658318
 GameObject:
   m_ObjectHideFlags: 0
@@ -7185,6 +7171,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 193182122}
+  - component: {fileID: 193182123}
   m_Layer: 5
   m_Name: Smartphone Controller Page (Motion Tracking)
   m_TagString: Untagged
@@ -7215,6 +7202,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &193182123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193182121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74f03fa34dacea348b0ecf96f04c7053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  left: {fileID: 1102663258}
+  right: {fileID: 808441389}
 --- !u!1 &193915619
 GameObject:
   m_ObjectHideFlags: 0
@@ -30074,7 +30075,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 808441390}
-  - component: {fileID: 808441391}
   m_Layer: 5
   m_Name: Right Hand Control
   m_TagString: Untagged
@@ -30103,19 +30103,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &808441391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 808441389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74f03fa34dacea348b0ecf96f04c7053, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  handedness: 1
 --- !u!1 &808942242
 GameObject:
   m_ObjectHideFlags: 0
@@ -30641,13 +30628,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 820975168}
+  - component: {fileID: 820975169}
   m_Layer: 5
   m_Name: Smartphone Controller Page (Pointer)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &820975168
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30671,6 +30659,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &820975169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820975167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74f03fa34dacea348b0ecf96f04c7053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  left: {fileID: 167310949}
+  right: {fileID: 2015849373}
 --- !u!1 &821874645
 GameObject:
   m_ObjectHideFlags: 0
@@ -40612,7 +40614,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1102663259}
-  - component: {fileID: 1102663260}
   m_Layer: 5
   m_Name: Left Hand Control
   m_TagString: Untagged
@@ -40641,19 +40642,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1102663260
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1102663258}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74f03fa34dacea348b0ecf96f04c7053, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  handedness: 0
 --- !u!1 &1103248225
 GameObject:
   m_ObjectHideFlags: 0
@@ -67598,8 +67586,8 @@ RectTransform:
   m_Father: {fileID: 984476200}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.389}
-  m_AnchorMax: {x: 1, y: 0.389}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -73399,7 +73387,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2015849374}
-  - component: {fileID: 2015849375}
   m_Layer: 5
   m_Name: Right Hand Control
   m_TagString: Untagged
@@ -73429,19 +73416,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2015849375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2015849373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74f03fa34dacea348b0ecf96f04c7053, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  handedness: 1
 --- !u!1 &2018476271
 GameObject:
   m_ObjectHideFlags: 0

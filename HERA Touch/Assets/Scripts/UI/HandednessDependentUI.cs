@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class HandednessDependentUI : MonoBehaviour
 {
-    public Handedness handedness;
+    public GameObject left;
+    public GameObject right;
 
     // Update is called once per frame
     void Update()
     {
-        if (HandController.Instance.handedness == handedness)
+        switch (HandController.Instance.handedness)
         {
-            gameObject.SetActive(true);
-        }
-        else
-        {
-            gameObject.SetActive(false);
+            case Handedness.Left:
+                left.SetActive(true);
+                right.SetActive(false);
+                break;
+            case Handedness.Right:
+                left.SetActive(false);
+                right.SetActive(true);
+                break;
         }
     }
 }
