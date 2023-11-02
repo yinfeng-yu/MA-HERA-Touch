@@ -12,7 +12,7 @@ public enum Handedness
     Both,
 }
 
-public class HandController : MonoBehaviour
+public class HandController : Singleton<HandController>
 {
     public float holdDuration = 1f;
     public float holdTime = 0f;
@@ -67,20 +67,6 @@ public class HandController : MonoBehaviour
 
     public void GrabButtonPressEnd()
     {
-        // pressed = false;
-        // holdTime = 0f;
-        // 
-        // switch (handedness)
-        // {
-        //     case Handedness.Left:
-        //         leftGrabButton.transform.localScale = new Vector3(1f, 1f, 1f);
-        //         break;
-        //     case Handedness.Right:
-        //         rightGrabButton.transform.localScale = new Vector3(1f, 1f, 1f);
-        //         break;
-        //     default:
-        //         break;
-        // }
 
         CommandSender.instance.SendGrabCommand(false, handedness);
     }
@@ -106,21 +92,29 @@ public class HandController : MonoBehaviour
 
     public void SwitchHand()
     {
-        handedness = handedness ^ Handedness.Both;
-
-        switch (handedness)
+        // handedness = handedness ^ Handedness.Both;
+        if (handedness == Handedness.Left)
         {
-            case Handedness.Left:
-                leftHandControl.SetActive(true);
-                rightHandControl.SetActive(false);
-                break;
-            case Handedness.Right:
-                leftHandControl.SetActive(false);
-                rightHandControl.SetActive(true);
-                break;
-            default:
-                break;
+            handedness = Handedness.Right;
         }
+        else
+        {
+            handedness = Handedness.Left;
+        }
+
+        // switch (handedness)
+        // {
+        //     case Handedness.Left:
+        //         leftHandControl.SetActive(true);
+        //         rightHandControl.SetActive(false);
+        //         break;
+        //     case Handedness.Right:
+        //         leftHandControl.SetActive(false);
+        //         rightHandControl.SetActive(true);
+        //         break;
+        //     default:
+        //         break;
+        // }
 
         CommandSender.instance.SendSwitchHandCommand(handedness);
     }
