@@ -22530,7 +22530,7 @@ PrefabInstance:
     - target: {fileID: 8551505210241191607, guid: c1539e0289263944499cb46498758a78,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8551505210241191607, guid: c1539e0289263944499cb46498758a78,
         type: 3}
@@ -23984,7 +23984,7 @@ PrefabInstance:
     - target: {fileID: 8551505210241191607, guid: c1539e0289263944499cb46498758a78,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8551505210241191607, guid: c1539e0289263944499cb46498758a78,
         type: 3}
@@ -34956,7 +34956,7 @@ PrefabInstance:
     - target: {fileID: 8551505210241191607, guid: c1539e0289263944499cb46498758a78,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8551505210241191607, guid: c1539e0289263944499cb46498758a78,
         type: 3}
@@ -36151,7 +36151,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &991939820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36159,13 +36159,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 991939819}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8044fde7b6cc6b41bbdee83f95d0733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxRange: 1.5
-  minRange: 0.1
   speed: 10
   velocityThreshold: 0.1
   accelerationThreshold: 0.04
@@ -44718,8 +44716,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frequency: 24
-  _sensorsReader: {fileID: 991939820}
-  arCamera: {fileID: 1608052130}
   phonePose: {fileID: 261767058}
 --- !u!224 &1191134976
 RectTransform:
@@ -63637,6 +63633,7 @@ GameObject:
   - component: {fileID: 1738714887}
   - component: {fileID: 1738714889}
   - component: {fileID: 1738714888}
+  - component: {fileID: 1738714890}
   m_Layer: 5
   m_Name: Range Slider
   m_TagString: Untagged
@@ -63733,6 +63730,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1738714890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738714886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcb1c677ffd2b5047a4665562002cc17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1741668269
 GameObject:
   m_ObjectHideFlags: 0
@@ -63977,6 +63986,7 @@ GameObject:
   - component: {fileID: 1762095171}
   - component: {fileID: 1762095172}
   - component: {fileID: 1762095173}
+  - component: {fileID: 1762095174}
   m_Layer: 5
   m_Name: Range Slider
   m_TagString: Untagged
@@ -64073,6 +64083,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swipeSpeed: 600
+--- !u!114 &1762095174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762095170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcb1c677ffd2b5047a4665562002cc17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1766532661
 GameObject:
   m_ObjectHideFlags: 0
@@ -74427,7 +74449,7 @@ PrefabInstance:
     - target: {fileID: 8551505210241191607, guid: c1539e0289263944499cb46498758a78,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8551505210241191607, guid: c1539e0289263944499cb46498758a78,
         type: 3}
