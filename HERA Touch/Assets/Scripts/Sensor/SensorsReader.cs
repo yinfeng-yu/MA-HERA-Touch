@@ -20,9 +20,7 @@ public class SensorsReader : MonoBehaviour
     // [SerializeField] Transform pivot;
     // [SerializeField] Transform hand;
 
-    float range = 5f;
-    [SerializeField] float maxRange = 10f;
-    [SerializeField] float minRange = 3f;
+    public static float range = 5f;
 
     [SerializeField] float speed = 10f;
     [SerializeField] float velocityThreshold = 0.05f;
@@ -60,36 +58,36 @@ public class SensorsReader : MonoBehaviour
 
     void Update()
     {
-        _acceleration.x = -Input.acceleration.y;
-        _acceleration.y = -Input.acceleration.z;
-        _acceleration.z = Input.acceleration.x;
+        // _acceleration.x = -Input.acceleration.y;
+        // _acceleration.y = -Input.acceleration.z;
+        // _acceleration.z = Input.acceleration.x;
+        // 
+        // _userAcceleration.x = -_gyro.userAcceleration.x;
+        // _userAcceleration.y = -_gyro.userAcceleration.z;
+        // _userAcceleration.z = -_gyro.userAcceleration.y;
+        // 
+        // _gravity.x = -_gyro.gravity.y;
+        // _gravity.y = -_gyro.gravity.z;
+        // _gravity.z = _gyro.gravity.x;
 
-        _userAcceleration.x = -_gyro.userAcceleration.x;
-        _userAcceleration.y = -_gyro.userAcceleration.z;
-        _userAcceleration.z = -_gyro.userAcceleration.y;
-
-        _gravity.x = -_gyro.gravity.y;
-        _gravity.y = -_gyro.gravity.z;
-        _gravity.z = _gyro.gravity.x;
-
-        ReadSlider();
+        // ReadSlider();
         // line.transform.localScale = new Vector3(line.transform.localScale.x, line.transform.localScale.y, range);
 
-        _orientation = GyroToUnity(_gyro.attitude);
-
-        _worldUserAcceleration = Vector3.zero;
-
-        // Vector3[] localAxes = { obj.right, obj.up, obj.forward };
-        Vector3[] localAxes = { _orientation * Vector3.right, _orientation * Vector3.up, _orientation * Vector3.forward };
-        Vector3[] worldAxes = { Vector3.right, Vector3.up, Vector3.forward };
-
-        for (int i = 0; i < 3; i ++)
-        {
-            for (int j = 0; j < 3; j++)
-            {
-                _worldUserAcceleration += Vector3.Project((_userAcceleration[i] * localAxes[i]), worldAxes[j]);
-            }
-        }
+        // _orientation = GyroToUnity(_gyro.attitude);
+        // 
+        // _worldUserAcceleration = Vector3.zero;
+        // 
+        // // Vector3[] localAxes = { obj.right, obj.up, obj.forward };
+        // Vector3[] localAxes = { _orientation * Vector3.right, _orientation * Vector3.up, _orientation * Vector3.forward };
+        // Vector3[] worldAxes = { Vector3.right, Vector3.up, Vector3.forward };
+        // 
+        // for (int i = 0; i < 3; i ++)
+        // {
+        //     for (int j = 0; j < 3; j++)
+        //     {
+        //         _worldUserAcceleration += Vector3.Project((_userAcceleration[i] * localAxes[i]), worldAxes[j]);
+        //     }
+        // }
 
         // Filter jittering
         // for (int i = 0; i < 3; i ++)
@@ -100,34 +98,34 @@ public class SensorsReader : MonoBehaviour
         //     }
         // }
 
-        if (_worldUserAcceleration.magnitude < accelerationThreshold)
-        {
-            _worldUserAcceleration = Vector3.zero;
-        }
-
-        // float filtered = kalmanFilter.Filter(_userAcceleration.y);
-        // Debug.Log($"Real value: {_userAcceleration.y}, Real-time filter: {filtered}");
-
-
-        if (Vector3.Dot(velocity, _worldUserAcceleration) < 0) // Now the device is decelerating
-        {
-            decelerationFlag = true;
-        }
-
-
-        velocity += _worldUserAcceleration * Time.deltaTime * speed;
-
-        if (velocity.magnitude < velocityThreshold && decelerationFlag)
-        {
-            velocity = Vector3.zero;
-            decelerationFlag = false;
-        }
-
-        if (_worldUserAcceleration.magnitude == 0 && decelerationFlag)
-        {
-            velocity = Vector3.zero;
-            decelerationFlag = false;
-        }
+        // if (_worldUserAcceleration.magnitude < accelerationThreshold)
+        // {
+        //     _worldUserAcceleration = Vector3.zero;
+        // }
+        // 
+        // // float filtered = kalmanFilter.Filter(_userAcceleration.y);
+        // // Debug.Log($"Real value: {_userAcceleration.y}, Real-time filter: {filtered}");
+        // 
+        // 
+        // if (Vector3.Dot(velocity, _worldUserAcceleration) < 0) // Now the device is decelerating
+        // {
+        //     decelerationFlag = true;
+        // }
+        // 
+        // 
+        // velocity += _worldUserAcceleration * Time.deltaTime * speed;
+        // 
+        // if (velocity.magnitude < velocityThreshold && decelerationFlag)
+        // {
+        //     velocity = Vector3.zero;
+        //     decelerationFlag = false;
+        // }
+        // 
+        // if (_worldUserAcceleration.magnitude == 0 && decelerationFlag)
+        // {
+        //     velocity = Vector3.zero;
+        //     decelerationFlag = false;
+        // }
 
         // obj.position += velocity * speed * Time.deltaTime;
         // obj.position += new Vector3(0, velocity.y * Time.deltaTime, 0);
@@ -183,7 +181,7 @@ public class SensorsReader : MonoBehaviour
         return sensorsData;
     }
 
-    void ReadSlider()
+    public void SetSlider()
     {
         // if (rangeSlider.value > 0.5f)
         // {

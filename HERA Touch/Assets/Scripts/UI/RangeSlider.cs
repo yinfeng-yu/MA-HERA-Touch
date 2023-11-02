@@ -27,6 +27,7 @@ public class RangeSlider : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             deltaY = Input.touches[0].position.y - startY;
 
             slider.value = Mathf.Clamp01(startValue + deltaY / swipeSpeed);
+            SliderReader.SetSlider(slider.value);
         }
     }
 
