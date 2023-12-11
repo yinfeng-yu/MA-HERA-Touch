@@ -26,11 +26,11 @@ public class TextureLoader : MonoBehaviour
     }
     #endregion
 
-    [SerializeField] public RenderTexture fpSrc;
-    [SerializeField] public RenderTexture tpSrc;
+    public RenderTexture fpSrc;
+    public RenderTexture tpSrc;
 
-    [SerializeField] public RawImage taskPageDst;
-    [SerializeField] public RawImage monitorPageDst;
+    public RawImage taskPageDst;
+    public RawImage monitorPageDst;
 
     [SerializeField] private byte[] frameData;
 

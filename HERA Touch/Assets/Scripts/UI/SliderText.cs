@@ -5,9 +5,15 @@ using UnityEngine;
 
 public class SliderText : MonoBehaviour
 {
-    // Update is called once per frame
+    private TextMeshProUGUI _text;
+
+    private void Start()
+    {
+        _text = GetComponentInChildren<TextMeshProUGUI>();
+    }
+
     void Update()
     {
-        GetComponentInChildren<TextMeshProUGUI>().text = ((int)(SliderReader.Value * 100)).ToString() + '%';
+        _text.text = ((int)(SliderReader.Value * 100)).ToString() + '%';
     }
 }

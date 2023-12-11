@@ -7,7 +7,6 @@ public enum Platform
 {
     AR,
     Smartphone,
-    Robody,
 }
 
 public class TransmissionManager : Singleton<TransmissionManager>
@@ -25,9 +24,6 @@ public class TransmissionManager : Singleton<TransmissionManager>
                 NetworkTransmitter.Send(message);
                 break;
             case Platform.Smartphone:
-                break;
-            case Platform.Robody:
-                Debug.Log("Send data to Robody");
                 break;
             default:
                 break;

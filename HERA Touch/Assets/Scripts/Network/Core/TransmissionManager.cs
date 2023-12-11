@@ -24,7 +24,6 @@ public struct StreamDataHeader
     public int height;
 }
 
-[RequireComponent(typeof(NetworkMessageHandler))]
 public class aTransmissionManager : MonoBehaviour
 {
     [Serializable]

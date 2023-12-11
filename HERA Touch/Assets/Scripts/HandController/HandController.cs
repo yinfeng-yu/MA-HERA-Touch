@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// This enum is defined the same way as that of AR Environment
+/// This enum is defined the same way as that of AR Environment project
 /// </summary>
 public enum Handedness
 {
@@ -14,85 +14,26 @@ public enum Handedness
 
 public class HandController : Singleton<HandController>
 {
-    public float holdDuration = 1f;
-    public float holdTime = 0f;
-    public bool pressed = false;
-
     public GameObject leftHandControl;
     public GameObject rightHandControl;
 
-    public GameObject leftGrabButton;
-    public GameObject rightGrabButton;
-
     public Handedness handedness = Handedness.Left;
-
-    // Start is called before the first frame update
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (pressed)
-        {
-            holdTime += Time.deltaTime;
-
-            switch (handedness)
-            {
-                case Handedness.Left:
-                    leftGrabButton.transform.localScale = Vector3.Lerp(new Vector3(1f, 1f, 1f), new Vector3(1.7f, 1.7f, 1f), holdTime / holdDuration);
-                    break;
-                case Handedness.Right:
-                    rightGrabButton.transform.localScale = Vector3.Lerp(new Vector3(1f, 1f, 1f), new Vector3(1.7f, 1.7f, 1f), holdTime / holdDuration);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        if (holdTime >= holdDuration)
-        {
-            pressed = false;
-            holdTime = 0f;
-
-            GrabButtonTriggered();
-        }
-    }
 
     public void GrabButtonPressStart()
     {
-        // pressed = true;
-        CommandSender.instance.SendGrabCommand(true, handedness);
-
         Handheld.Vibrate();
+        CommandSender.instance.SendGrabCommand(true, handedness);
     }
-
+    
     public void GrabButtonPressEnd()
     {
-
-        CommandSender.instance.SendGrabCommand(false, handedness);
-    }
-
-    public void GrabButtonTriggered()
-    {
         Handheld.Vibrate();
-
-        switch (handedness)
-        {
-            case Handedness.Left:
-                leftGrabButton.transform.localScale = new Vector3(1f, 1f, 1f);
-                break;
-            case Handedness.Right:
-                rightGrabButton.transform.localScale = new Vector3(1f, 1f, 1f);
-                break;
-            default:
-                break;
-        }
-
-        // CommandSender.instance.SendGrabCommand(handedness);
+        CommandSender.instance.SendGrabCommand(false, handedness);
     }
 
     public void SwitchHand()
     {
-        // handedness = handedness ^ Handedness.Both;
+        // Bit hack is also an option
         if (handedness == Handedness.Left)
         {
             handedness = Handedness.Right;
@@ -102,20 +43,7 @@ public class HandController : Singleton<HandController>
             handedness = Handedness.Left;
         }
 
-        // switch (handedness)
-        // {
-        //     case Handedness.Left:
-        //         leftHandControl.SetActive(true);
-        //         rightHandControl.SetActive(false);
-        //         break;
-        //     case Handedness.Right:
-        //         leftHandControl.SetActive(false);
-        //         rightHandControl.SetActive(true);
-        //         break;
-        //     default:
-        //         break;
-        // }
-
+        // Command the AR Environment to switch hand
         CommandSender.instance.SendSwitchHandCommand(handedness);
     }
 }

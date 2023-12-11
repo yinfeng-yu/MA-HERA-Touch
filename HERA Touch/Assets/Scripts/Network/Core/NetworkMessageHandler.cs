@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NetworkMessageHandler : MonoBehaviour
+public static class NetworkMessageHandler
 {
-    public void ProcessMessage(string rawMessage, NetworkMessage currentMessage, NetworkTransmitter networkTransmitter)
+    public static void ProcessMessage(string rawMessage, NetworkMessage currentMessage, NetworkTransmitter networkTransmitter)
     {
         // var peers = transmissionManager.GetPeers();
 

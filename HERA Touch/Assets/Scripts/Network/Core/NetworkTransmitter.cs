@@ -25,7 +25,6 @@ public class Peer
     }
 }
 
-[RequireComponent(typeof(NetworkMessageHandler))]
 public class NetworkTransmitter : Transmitter
 {
     //Public Variables:
@@ -218,7 +217,8 @@ public class NetworkTransmitter : Transmitter
                     continue;
                 }
 
-                GetComponent<NetworkMessageHandler>().ProcessMessage(rawMessage, currentMessage, this);
+                // GetComponent<NetworkMessageHandler>().ProcessMessage(rawMessage, currentMessage, this);
+                NetworkMessageHandler.ProcessMessage(rawMessage, currentMessage, this);
 
 
             }
