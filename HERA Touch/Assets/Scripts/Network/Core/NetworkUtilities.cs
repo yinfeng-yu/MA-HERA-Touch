@@ -29,6 +29,7 @@ public static class NetworkUtilities
                     if (item.AddressFamily == AddressFamily.InterNetwork)
                     {
                         _address = item.ToString();
+                        break;
                     }
                 }
 

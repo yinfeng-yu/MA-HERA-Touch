@@ -6,9 +6,8 @@ using UnityEngine.UI;
 
 public class ResetPoseButton : MonoBehaviour, IPointerDownHandler
 {
-    public Transform arCamera;
+    public SensorsReader sensorsReader;
     public Quaternion rotation;
-    public Vector3 position;
 
     private Button _button;
 
@@ -19,25 +18,23 @@ public class ResetPoseButton : MonoBehaviour, IPointerDownHandler
 
     private void Update()
     {
-        Quaternion cameraRot = arCamera.rotation;
+        Quaternion cameraRot = sensorsReader.ReadOrientation();
 
-        if (Mathf.Abs(cameraRot.eulerAngles.x) < 45f && Mathf.Abs(cameraRot.eulerAngles.z) < 45f) 
-        {
-            _button.interactable = true;
-        }
-        else
-        {
-            _button.interactable = false;  
-        }
+        _button.interactable = true;
+
+        // if (Mathf.Abs(cameraRot.eulerAngles.x) < 45f && Mathf.Abs(cameraRot.eulerAngles.z) < 45f) 
+        // {
+        //     _button.interactable = true;
+        // }
+        // else
+        // {
+        //     _button.interactable = false;  
+        // }
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        rotation = arCamera.rotation;
-        position = arCamera.position;
-        // Debug.Log($"eulers: {rotation}");
-        // phone.Rotate(0, -eulers.y, 0);
-        // phone.rotation = Quaternion.Euler(eulers.x, 0, eulers.z);
+        rotation = sensorsReader.ReadOrientation();
     }
 
 

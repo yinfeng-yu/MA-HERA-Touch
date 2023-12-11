@@ -28,6 +28,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6430265832724830075}
   m_RootOrder: 0
@@ -86,7 +87,7 @@ GameObject:
   - component: {fileID: 6430265832724830075}
   - component: {fileID: 2701373695994645746}
   - component: {fileID: 3829409882104929658}
-  - component: {fileID: 1581848895333043318}
+  - component: {fileID: 9149816508401179321}
   - component: {fileID: 179647219015587698}
   m_Layer: 5
   m_Name: PREFAB_TaskButton
@@ -105,6 +106,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5455814566600772441}
   - {fileID: 7444316957524159727}
@@ -168,8 +170,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7444316957524159720}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1581848895333043318
+      m_Calls:
+      - m_Target: {fileID: 9149816508401179321}
+        m_TargetAssemblyTypeName: SetActiveButton, Assembly-CSharp
+        m_MethodName: TargetToggleActive
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &9149816508401179321
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -178,13 +192,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1663198888866426327}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15a286f50357cf44aab1db4e7fee6ff6, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b183043116583542a6f248efe659794, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
 --- !u!95 &179647219015587698
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -197,10 +211,12 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4859392259368310838
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,6 +245,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6430265832724830075}
   m_RootOrder: 2
@@ -364,6 +381,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6430265832724830075}
   m_RootOrder: 1

@@ -15,6 +15,9 @@ public class ChooseLocationOnMap : MonoBehaviour, IPointerDownHandler, IPointerU
 
     bool _touched = false;
 
+    /// <summary>
+    /// If the room size changes, change these parameters according to the new size
+    /// </summary>
     int realWidth = 15;
     int realHeight = 8;
     float roomScale = 4f;

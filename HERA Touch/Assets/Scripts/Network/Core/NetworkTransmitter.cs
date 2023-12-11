@@ -59,7 +59,7 @@ public class NetworkTransmitter : Transmitter
     public List<string> _confirmedReliableMessages = new List<string>();
     private static Dictionary<string, NetworkMessage> _unconfirmedReliableMessages = new Dictionary<string, NetworkMessage>();
 
-    // public string appKey;
+    public static string appKey;
 
     public Dictionary<string, Peer> peers
     {
@@ -74,6 +74,8 @@ public class NetworkTransmitter : Transmitter
             return;
         }
         _initialized = true;
+
+        appKey = NetworkUtilities.UniqueID();
 
         //establish socket:
         bool socketOpen = false;
@@ -141,16 +143,16 @@ public class NetworkTransmitter : Transmitter
             NetworkMessage rawMessage = JsonUtility.FromJson<NetworkMessage>(serialized);
 
             // keys evaluations:
-            // if (rawMessage.a != instance.appKey)
-            // {
-            //     //we send the serialized string for easier debug messages:
-            //     _receivedMessages.Add(serialized);
-            // }
-
-            if (rawMessage.f != NetworkUtilities.MyAddress)
+            if (rawMessage.a != appKey)
             {
+                //we send the serialized string for easier debug messages:
                 _receivedMessages.Add(serialized);
             }
+
+            // if (rawMessage.f != NetworkUtilities.MyAddress)
+            // {
+            //     _receivedMessages.Add(serialized);
+            // }
 
         }
     }
@@ -255,7 +257,7 @@ public class NetworkTransmitter : Transmitter
         IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, SendPort);
         // _udpClient = new UdpClient(instance.receivePort);
 #else
-        IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, instance.port);
+        IPEndPoint endPoint = new IPEndPoint(IPAddress.Any, Port);
 #endif
 
         // Size check:
