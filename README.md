@@ -36,5 +36,3 @@ The main features of the application include:
 ## Troubleshooting
 In case of any issues or questions about the project, contact [yinfeng.yu@tum.de](mailto:yinfeng.yu@tum.de).
 
-## API Documentation
-For further development of / modification to "HERA Touch", refer to the API documentation [here]().
